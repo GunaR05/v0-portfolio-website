@@ -36,7 +36,7 @@ const contactLinks = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Boston, MA | Open to NYC, SF, Seattle, Remote",
+    value: "Boston, MA — Open to NYC · SF · Seattle · Remote",
     href: null
   }
 ]

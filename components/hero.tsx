@@ -177,7 +177,7 @@ export function Hero() {
                   <div className="flex items-center justify-between text-sm">
                     <div className="text-center">
                       <span className="text-primary font-bold text-lg">5+</span>
-                      <p className="text-muted-foreground text-xs">Years</p>
+                      <p className="text-muted-foreground text-xs">Years Experience</p>
                     </div>
                     <div className="text-center">
                       <span className="text-secondary font-bold text-lg">10K+</span>

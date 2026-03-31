@@ -91,8 +91,7 @@ export function About() {
                 millions of e-commerce users, and millions of daily riders.
               </p>
               <p>
-                Currently pursuing MS Computer Science at Northeastern University, Boston, focusing 
-                on applied AI systems and intelligent infrastructure design.
+                Currently pursuing MS Computer Science at Northeastern University, Boston, focusing on applied AI systems and intelligent infrastructure design.
               </p>
             </motion.div>
 
