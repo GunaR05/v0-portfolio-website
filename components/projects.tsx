@@ -2,65 +2,66 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Github } from "lucide-react"
+import { ArrowRight, Github, Building2, Shield, ShoppingCart, Car, BarChart3, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const filters = ["All", "LLM", "Search", "MLOps"]
+const filters = ["All", "LLM", "MLOps", "Distributed"]
 
 const projects = [
   {
     id: 1,
-    title: "Intelligent Document Q&A System",
-    description: "Production-grade RAG pipeline with semantic chunking, hybrid search, and GPT-4 integration for enterprise document intelligence.",
-    tags: ["LLM", "RAG", "FastAPI"],
+    title: "RAG Financial Research Platform",
+    description: "Built at Aiera — LLM inference pipelines and hybrid RAG retrieval (BM25 + vector search) for hedge funds and investment banks. 10,000+ req/min on AWS EKS with 35% P95 latency reduction.",
+    tags: ["LangChain", "OpenSearch", "Claude", "MCP"],
     category: "LLM",
-    icon: "📄",
-    gradient: "from-blue-900/50 to-blue-800/30"
+    icon: Building2,
+    gradient: "from-blue-950/80 to-blue-900/40",
+    badge: "Aiera x Anthropic"
   },
   {
     id: 2,
-    title: "Semantic Search Pipeline",
-    description: "High-performance vector search system with FAISS indexing, achieving sub-10ms query latency at million-document scale.",
-    tags: ["Semantic Search", "FAISS", "Python"],
-    category: "Search",
-    icon: "🔍",
-    gradient: "from-purple-900/50 to-purple-800/30"
+    title: "Fraud Detection System",
+    description: "Built at Airtel — Sub-50ms real-time fraud detection and credit risk decisioning for Airtel Payments Bank processing millions of daily UPI transactions with Kafka-driven event streaming.",
+    tags: ["Kafka", "Deep Learning", "Real-time"],
+    category: "MLOps",
+    icon: Shield,
+    gradient: "from-violet-950/80 to-violet-900/40"
   },
   {
     id: 3,
-    title: "AI Customer Support Agent",
-    description: "Multi-turn conversational AI with context persistence, sentiment analysis, and seamless human handoff capabilities.",
-    tags: ["Chatbot", "LangChain", "Docker"],
-    category: "LLM",
-    icon: "🤖",
-    gradient: "from-teal-900/50 to-teal-800/30"
+    title: "E-commerce ML Platform",
+    description: "Built at Flipkart — CTR prediction, ranking, and auction optimization sustaining 110+ orders/sec during Big Billion Days. Achieved 3x throughput improvement with Kubernetes autoscaling on Azure AKS.",
+    tags: ["Spark", "Kubernetes", "Redis"],
+    category: "Distributed",
+    icon: ShoppingCart,
+    gradient: "from-teal-950/80 to-teal-900/40"
   },
   {
     id: 4,
-    title: "ML Model Monitoring System",
-    description: "End-to-end MLOps platform with drift detection, automated retraining, and real-time performance dashboards.",
-    tags: ["MLOps", "MLflow", "GCP"],
-    category: "MLOps",
-    icon: "📊",
-    gradient: "from-violet-900/50 to-violet-800/30"
+    title: "Driver Matching & Surge Pricing",
+    description: "Built at Ola — Real-time ML inference for dynamic surge pricing and driver matching across 250+ cities. Engineered fault-tolerant orchestration with eventual consistency across distributed microservices.",
+    tags: ["ML Inference", "Redis", "Microservices"],
+    category: "Distributed",
+    icon: Car,
+    gradient: "from-green-950/80 to-green-900/40"
   },
   {
     id: 5,
-    title: "AI Knowledge Graph Explorer",
-    description: "Interactive knowledge graph built from unstructured text using NER and relation extraction with React visualization.",
-    tags: ["NLP", "Knowledge Graph", "React"],
-    category: "LLM",
-    icon: "🧠",
-    gradient: "from-emerald-900/50 to-emerald-800/30"
+    title: "LLM Observability Stack",
+    description: "Full model observability platform with OpenTelemetry, Prometheus, and Grafana. A/B testing frameworks and SLA dashboards for Wall Street enterprise clients at 10,000+ req/min.",
+    tags: ["OpenTelemetry", "Prometheus", "Grafana"],
+    category: "MLOps",
+    icon: BarChart3,
+    gradient: "from-orange-950/80 to-orange-900/40"
   },
   {
     id: 6,
-    title: "LLM Evaluation Framework",
-    description: "Comprehensive testing suite for LLM applications with automated benchmarking, bias detection, and quality metrics.",
-    tags: ["LLMOps", "Evaluation", "API"],
-    category: "MLOps",
-    icon: "⚡",
-    gradient: "from-orange-900/50 to-orange-800/30"
+    title: "Semantic Search Pipeline",
+    description: "High-performance vector search system with FAISS indexing and sentence transformers, achieving sub-10ms query latency at million-document scale with FastAPI backend.",
+    tags: ["FAISS", "Sentence Transformers", "FastAPI"],
+    category: "LLM",
+    icon: Search,
+    gradient: "from-purple-950/80 to-purple-900/40"
   }
 ]
 
@@ -72,7 +73,7 @@ export function Projects() {
   )
 
   return (
-    <section id="projects" className="py-20 md:py-32 bg-card/50">
+    <section id="projects" className="py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
@@ -88,6 +89,9 @@ export function Projects() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
             Featured <span className="gradient-text">Projects</span>
           </h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+            Production-grade AI systems built end-to-end — from architecture to deployment.
+          </p>
         </motion.div>
 
         {/* Filter tabs */}
@@ -128,14 +132,21 @@ export function Projects() {
                 className={`group relative bg-gradient-to-br ${project.gradient} border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300`}
               >
                 {/* Icon */}
-                <div className="text-4xl mb-4">{project.icon}</div>
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <project.icon className="h-6 w-6 text-primary" />
+                </div>
+
+                {/* Category badge */}
+                <span className="inline-block px-2 py-1 text-xs bg-background/50 text-primary rounded-md mb-2">
+                  {project.category}
+                </span>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 text-xs bg-background/50 text-muted-foreground rounded-md"
+                      className="px-2 py-1 text-xs bg-muted/50 text-muted-foreground rounded-md"
                     >
                       {tag}
                     </span>
@@ -151,6 +162,15 @@ export function Projects() {
                 <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
                   {project.description}
                 </p>
+
+                {/* Badge if exists */}
+                {project.badge && (
+                  <div className="mb-4">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">
+                      <span>🤝</span> {project.badge}
+                    </span>
+                  </div>
+                )}
 
                 {/* Actions */}
                 <div className="flex items-center justify-between">

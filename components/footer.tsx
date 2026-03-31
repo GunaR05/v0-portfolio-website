@@ -11,9 +11,9 @@ const navLinks = [
 ]
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/gunashree", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/gunashree", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:gunashree@example.com", label: "Email" },
+  { icon: Github, href: "https://github.com/gunashree-rajakumar", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/rajakumargunashree", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:rajakumar.g@northeastern.edu", label: "Email" },
 ]
 
 export function Footer() {
@@ -41,7 +41,7 @@ export function Footer() {
             </div>
             <div>
               <p className="font-bold text-foreground font-[family-name:var(--font-poppins)]">Gunashree Rajakumar</p>
-              <p className="text-sm text-muted-foreground">Applied AI Systems Engineer</p>
+              <p className="text-sm text-muted-foreground">Senior Software Engineer</p>
             </div>
           </motion.div>
 
@@ -96,7 +96,7 @@ export function Footer() {
           className="mt-8 pt-8 border-t border-border text-center"
         >
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Gunashree Rajakumar. All rights reserved.
+            © 2026 Gunashree Rajakumar
           </p>
         </motion.div>
       </div>

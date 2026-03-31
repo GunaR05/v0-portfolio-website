@@ -4,21 +4,34 @@ import { motion } from "framer-motion"
 import { Download, ArrowDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const codeSnippet = `from langchain import OpenAI, PromptTemplate
-from pinecone import Pinecone
+// Pre-tokenized code lines to avoid hydration issues with regex
+const codeLines = [
+  { lineNum: 1, tokens: [{ text: "from", type: "keyword" }, { text: " langchain ", type: "plain" }, { text: "import", type: "keyword" }, { text: " OpenAI", type: "class" }] },
+  { lineNum: 2, tokens: [{ text: "from", type: "keyword" }, { text: " opensearch ", type: "plain" }, { text: "import", type: "keyword" }, { text: " OpenSearch", type: "class" }] },
+  { lineNum: 3, tokens: [] },
+  { lineNum: 4, tokens: [{ text: "class", type: "keyword" }, { text: " RAGPipeline", type: "class" }, { text: ":", type: "plain" }] },
+  { lineNum: 5, tokens: [{ text: "    ", type: "plain" }, { text: "def", type: "keyword" }, { text: " __init__", type: "method" }, { text: "(", type: "plain" }, { text: "self", type: "keyword" }, { text: "):", type: "plain" }] },
+  { lineNum: 6, tokens: [{ text: "        ", type: "plain" }, { text: "self", type: "keyword" }, { text: ".llm = OpenAI", type: "class" }, { text: "(model=", type: "plain" }, { text: '"claude-3"', type: "string" }, { text: ")", type: "plain" }] },
+  { lineNum: 7, tokens: [{ text: "        ", type: "plain" }, { text: "self", type: "keyword" }, { text: ".vectordb = OpenSearch", type: "class" }, { text: "()", type: "plain" }] },
+  { lineNum: 8, tokens: [] },
+  { lineNum: 9, tokens: [{ text: "    ", type: "plain" }, { text: "async", type: "keyword" }, { text: " ", type: "plain" }, { text: "def", type: "keyword" }, { text: " hybrid_search", type: "method" }, { text: "(", type: "plain" }, { text: "self", type: "keyword" }, { text: ", query: str):", type: "plain" }] },
+  { lineNum: 10, tokens: [{ text: "        ", type: "plain" }, { text: "# BM25 + vector search", type: "comment" }] },
+  { lineNum: 11, tokens: [{ text: "        bm25 = ", type: "plain" }, { text: "self", type: "keyword" }, { text: ".vectordb.bm25", type: "method" }, { text: "(query)", type: "plain" }] },
+  { lineNum: 12, tokens: [{ text: "        vector = ", type: "plain" }, { text: "self", type: "keyword" }, { text: ".vectordb.vector", type: "method" }, { text: "(query)", type: "plain" }] },
+  { lineNum: 13, tokens: [{ text: "        ", type: "plain" }, { text: "return", type: "keyword" }, { text: " ", type: "plain" }, { text: "self", type: "keyword" }, { text: ".rerank", type: "method" }, { text: "(bm25, vector)", type: "plain" }] },
+  { lineNum: 14, tokens: [] },
+  { lineNum: 15, tokens: [{ text: "    ", type: "plain" }, { text: "async", type: "keyword" }, { text: " ", type: "plain" }, { text: "def", type: "keyword" }, { text: " generate", type: "method" }, { text: "(", type: "plain" }, { text: "self", type: "keyword" }, { text: ", context):", type: "plain" }] },
+  { lineNum: 16, tokens: [{ text: "        ", type: "plain" }, { text: "return", type: "keyword" }, { text: " ", type: "plain" }, { text: "self", type: "keyword" }, { text: ".llm.generate", type: "method" }, { text: "(context)", type: "plain" }] },
+]
 
-class AIDocumentPipeline:
-    def __init__(self):
-        self.llm = OpenAI(model="gpt-4")
-        self.vectordb = Pinecone()
-    
-    async def process_query(self, query: str):
-        # Semantic search + LLM generation
-        context = await self.vectordb.search(query)
-        response = self.llm.generate(
-            prompt=self._build_prompt(query, context)
-        )
-        return response`
+const tokenColors: Record<string, string> = {
+  keyword: "#7B61FF",
+  class: "#00E5C3",
+  string: "#00C2FF",
+  comment: "#8BA3BC",
+  method: "#00C2FF",
+  plain: "inherit",
+}
 
 export function Hero() {
   const scrollToProjects = () => {
@@ -72,7 +85,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl md:text-2xl text-primary font-semibold"
             >
-              Applied AI Systems Engineer
+              Senior Software Engineer & Applied AI Systems Engineer
             </motion.p>
 
             {/* UVP paragraph */}
@@ -82,9 +95,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-muted-foreground max-w-xl leading-relaxed"
             >
-              I design production-ready AI systems that combine large language models, 
-              semantic search, and scalable backend engineering — transforming AI prototypes 
-              into reliable, high-performance intelligent products.
+              I build AI systems that work in the real world — not just in notebooks. 
+              5+ years shipping production-grade ML infrastructure, LLM-powered agentic systems, 
+              and distributed backends across fintech, e-commerce, telecom, and ride-hailing at scale.
             </motion.p>
 
             {/* CTA buttons */}
@@ -134,29 +147,46 @@ export function Hero() {
                   <div className="w-3 h-3 rounded-full bg-red-500" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-4 text-sm text-muted-foreground font-mono">ai_pipeline.py</span>
+                  <span className="ml-4 text-sm text-muted-foreground font-mono">rag_pipeline.py</span>
                 </div>
                 
                 {/* Code content */}
                 <pre className="text-sm font-mono overflow-x-auto">
                   <code>
-                    {codeSnippet.split('\n').map((line, i) => (
-                      <div key={i} className="leading-6">
-                        <span className="text-muted-foreground mr-4 select-none">{String(i + 1).padStart(2, ' ')}</span>
-                        <span dangerouslySetInnerHTML={{ 
-                          __html: highlightCode(line) 
-                        }} />
+                    {codeLines.map((line) => (
+                      <div key={line.lineNum} className="leading-6">
+                        <span className="text-muted-foreground mr-4 select-none">
+                          {String(line.lineNum).padStart(2, " ")}
+                        </span>
+                        {line.tokens.length === 0 ? (
+                          <span>&nbsp;</span>
+                        ) : (
+                          line.tokens.map((token, idx) => (
+                            <span key={idx} style={{ color: tokenColors[token.type] }}>
+                              {token.text}
+                            </span>
+                          ))
+                        )}
                       </div>
                     ))}
                   </code>
                 </pre>
 
                 {/* Stats row */}
-                <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-6">
-                    <span className="text-primary font-semibold">5+ AI Projects</span>
-                    <span className="text-secondary font-semibold">3+ LLM Apps</span>
-                    <span className="text-accent font-semibold">MS Northeastern</span>
+                <div className="mt-6 pt-4 border-t border-border">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="text-center">
+                      <span className="text-primary font-bold text-lg">5+</span>
+                      <p className="text-muted-foreground text-xs">Years</p>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-secondary font-bold text-lg">10K+</span>
+                      <p className="text-muted-foreground text-xs">Req/Min</p>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-accent font-bold text-lg">4</span>
+                      <p className="text-muted-foreground text-xs">Companies</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -169,13 +199,4 @@ export function Hero() {
       </div>
     </section>
   )
-}
-
-function highlightCode(line: string): string {
-  return line
-    .replace(/(from|import|class|def|async|await|return|self)/g, '<span style="color: #7B61FF">$1</span>')
-    .replace(/(OpenAI|PromptTemplate|Pinecone|AIDocumentPipeline)/g, '<span style="color: #00E5C3">$1</span>')
-    .replace(/(".*?")/g, '<span style="color: #00C2FF">$1</span>')
-    .replace(/(#.*)/g, '<span style="color: #8BA3BC">$1</span>')
-    .replace(/(\.__init__|\.search|\.generate|\.llm|\.vectordb|_build_prompt)/g, '<span style="color: #00C2FF">$1</span>')
 }

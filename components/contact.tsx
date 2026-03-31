@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Mail, Linkedin, Github, MapPin, Send, CheckCircle } from "lucide-react"
+import { Mail, Linkedin, Github, MapPin, Send, CheckCircle, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,25 +12,31 @@ const contactLinks = [
   {
     icon: Mail,
     label: "Email",
-    value: "gunashree@example.com",
-    href: "mailto:gunashree@example.com"
+    value: "rajakumar.g@northeastern.edu",
+    href: "mailto:rajakumar.g@northeastern.edu"
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "+1 (617) 318-7385",
+    href: "tel:+16173187385"
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
-    value: "linkedin.com/in/gunashree",
-    href: "https://linkedin.com/in/gunashree"
+    value: "linkedin.com/in/rajakumargunashree",
+    href: "https://linkedin.com/in/rajakumargunashree"
   },
   {
     icon: Github,
     label: "GitHub",
-    value: "github.com/gunashree",
-    href: "https://github.com/gunashree"
+    value: "github.com/gunashree-rajakumar",
+    href: "https://github.com/gunashree-rajakumar"
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Boston, MA",
+    value: "Boston, MA | Open to NYC, SF, Seattle, Remote",
     href: null
   }
 ]
@@ -49,7 +55,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-card/50">
+    <section id="contact" className="py-20 md:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
@@ -63,8 +69,11 @@ export function Contact() {
             Contact
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
-            Let&apos;s Build <span className="gradient-text">Together</span>
+            Let&apos;s <span className="gradient-text">Build Together</span>
           </h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+            Open to Senior SWE, Staff MLE, and AI Engineer roles. Let&apos;s connect.
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
@@ -74,49 +83,42 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="space-y-6"
+            className="space-y-4"
           >
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I&apos;m always interested in hearing about new opportunities, 
-              collaborations, or just connecting with fellow engineers and AI enthusiasts.
-            </p>
-
-            <div className="space-y-4">
-              {contactLinks.map((link) => (
-                <motion.div
-                  key={link.label}
-                  whileHover={{ x: 5 }}
-                  className="group"
-                >
-                  {link.href ? (
-                    <a
-                      href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl hover:border-primary/50 transition-colors"
-                    >
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <link.icon className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{link.label}</p>
-                        <p className="font-medium text-foreground">{link.value}</p>
-                      </div>
-                    </a>
-                  ) : (
-                    <div className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <link.icon className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{link.label}</p>
-                        <p className="font-medium text-foreground">{link.value}</p>
-                      </div>
+            {contactLinks.map((link) => (
+              <motion.div
+                key={link.label}
+                whileHover={{ x: 5 }}
+                className="group"
+              >
+                {link.href ? (
+                  <a
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl hover:border-primary/50 transition-colors"
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                      <link.icon className="h-5 w-5 text-primary" />
                     </div>
-                  )}
-                </motion.div>
-              ))}
-            </div>
+                    <div className="min-w-0">
+                      <p className="text-sm text-muted-foreground">{link.label}</p>
+                      <p className="font-medium text-foreground truncate">{link.value}</p>
+                    </div>
+                  </a>
+                ) : (
+                  <div className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <link.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm text-muted-foreground">{link.label}</p>
+                      <p className="font-medium text-foreground">{link.value}</p>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Right - Contact form */}
@@ -192,14 +194,14 @@ export function Contact() {
                     className="w-full gradient-bg text-white font-semibold hover:opacity-90 transition-opacity"
                   >
                     {isLoading ? (
-                      <>
-                        <span className="animate-spin mr-2">⏳</span>
+                      <span className="flex items-center">
+                        <span className="animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
                         Sending...
-                      </>
+                      </span>
                     ) : (
                       <>
-                        <Send className="mr-2 h-4 w-4" />
                         Send Message
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </>
                     )}
                   </Button>
@@ -210,5 +212,23 @@ export function Contact() {
         </div>
       </div>
     </section>
+  )
+}
+
+function ArrowRight({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
   )
 }

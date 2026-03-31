@@ -28,17 +28,19 @@ const valueCards = [
 ]
 
 const skills = [
-  { name: "LLM Integration & Prompt Engineering", percentage: 92 },
-  { name: "Semantic Search & RAG Pipelines", percentage: 88 },
-  { name: "Python / FastAPI / Backend Systems", percentage: 90 },
-  { name: "Cloud Deployment AWS/GCP", percentage: 80 },
-  { name: "Vector Databases Pinecone/FAISS", percentage: 85 },
-  { name: "System Design & Architecture", percentage: 83 },
+  { name: "LLM Systems & RAG Pipelines", percentage: 95 },
+  { name: "Distributed Systems & Backend", percentage: 92 },
+  { name: "React / TypeScript / Frontend", percentage: 88 },
+  { name: "ML Platform & Feature Engineering", percentage: 90 },
+  { name: "Cloud Infrastructure AWS/Azure/GCP", percentage: 85 },
+  { name: "Observability & MLOps", percentage: 87 },
 ]
 
 const techStack = [
-  "Python", "LangChain", "OpenAI API", "FastAPI", "Pinecone", "FAISS",
-  "PostgreSQL", "Docker", "AWS", "GCP", "React", "Git"
+  "Python", "LangChain", "OpenAI", "Anthropic Claude", "React", "TypeScript", 
+  "Redux", "FastAPI", "Kafka", "Kubernetes", "Docker", "AWS EKS", 
+  "Redis", "Spark", "PostgreSQL", "OpenSearch", "Prometheus", "Grafana", 
+  "OpenTelemetry", "MCP Servers", "FAISS", "Spring Boot"
 ]
 
 export function About() {
@@ -46,7 +48,7 @@ export function About() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="about" className="py-20 md:py-32 relative">
+    <section id="about" className="py-20 md:py-32 relative bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section tag */}
         <motion.div
@@ -60,7 +62,8 @@ export function About() {
             About Me
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
-            Bridging AI Research & <span className="gradient-text">Production Systems</span>
+            Bridging AI Research &<br />
+            <span className="gradient-text">Production Systems</span>
           </h2>
         </motion.div>
 
@@ -76,20 +79,20 @@ export function About() {
               className="space-y-4 text-muted-foreground leading-relaxed"
             >
               <p>
-                As an Applied AI Systems Engineer pursuing my Master&apos;s at Northeastern University, 
-                I specialize in bridging the gap between cutting-edge AI research and production-ready 
-                systems. My work focuses on building intelligent applications that leverage large 
-                language models, semantic search, and scalable backend architectures.
+                Senior Software Engineer and MS CS student at Northeastern University with 5+ years 
+                of experience designing and shipping production-grade ML infrastructure, LLM-powered 
+                agentic systems, and high-performance distributed backends across Aiera, Flipkart, 
+                Airtel, and Ola.
               </p>
               <p>
-                I&apos;m passionate about transforming complex AI concepts into reliable, maintainable 
-                software. Whether it&apos;s designing RAG pipelines that reduce hallucinations, optimizing 
-                vector search for millisecond latencies, or architecting LLM-powered workflows, 
-                I bring a systems-thinking approach to every challenge.
+                I specialize in the full AI/ML stack — from RAG pipelines and LLM inference to 
+                real-time feature serving, distributed systems, and full-stack React/TypeScript 
+                applications. My work serves institutional investors on Wall Street, hundreds of 
+                millions of e-commerce users, and millions of daily riders.
               </p>
               <p>
-                My goal is to create AI solutions that don&apos;t just work in demos—they excel in 
-                production environments where reliability, scalability, and user experience matter.
+                Currently pursuing MS Computer Science at Northeastern University, Boston, focusing 
+                on applied AI systems and intelligent infrastructure design.
               </p>
             </motion.div>
 
@@ -152,7 +155,7 @@ export function About() {
                 {techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 text-sm bg-muted text-muted-foreground rounded-full border border-border hover:border-primary/50 hover:text-primary transition-colors"
+                    className="px-3 py-1 text-sm bg-muted text-muted-foreground rounded-full border border-border hover:border-primary/50 hover:text-primary transition-colors cursor-default"
                   >
                     {tech}
                   </span>
