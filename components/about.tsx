@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Zap, Brain, Building2, Users } from "lucide-react"
+import Image from "next/image"
 
 const valueCards = [
   {
@@ -50,21 +51,40 @@ export function About() {
   return (
     <section id="about" className="py-20 md:py-32 relative bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section tag */}
+        {/* Profile Photo and Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="flex flex-col md:flex-row items-center gap-8 mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            About Me
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
-            Bridging AI Research &<br />
-            <span className="gradient-text">Production Systems</span>
-          </h2>
+          {/* Profile Image */}
+          <div className="flex-shrink-0">
+            <div className="relative w-[200px] h-[200px] rounded-full p-[3px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF]">
+              <div className="w-full h-full rounded-full overflow-hidden bg-background">
+                <Image
+                  src="/profile.jpg"
+                  alt="Gunashree Rajakumar"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Section tag and heading */}
+          <div className="text-center md:text-left">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+              About Me
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
+              Bridging AI Research &<br />
+              <span className="gradient-text">Production Systems</span>
+            </h2>
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
