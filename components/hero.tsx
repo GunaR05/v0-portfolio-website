@@ -121,7 +121,7 @@ export function Hero() {
                 className="border-border hover:bg-muted"
                 asChild
               >
-                <a href="/cv.pdf" download>
+                <a href="https://drive.google.com/uc?export=download&id=1mjO0TQ3qORy1HZu-sOa1TC4cxfrm_XEb" download>
                   <Download className="mr-2 h-4 w-4" />
                   Download CV
                 </a>
