@@ -61,7 +61,11 @@ export function About() {
         >
           {/* Profile Image */}
           <div className="flex-shrink-0">
-            <div className="relative w-[200px] h-[200px] rounded-full p-[3px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF]">
+            <motion.div 
+              className="relative w-[200px] h-[200px] rounded-full p-[3px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, linear: true }}
+            >
               <div className="w-full h-full rounded-full overflow-hidden bg-background">
                 <Image
                   src="/profile.jpg"
@@ -72,7 +76,7 @@ export function About() {
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Section tag and heading */}
@@ -105,7 +109,7 @@ export function About() {
                 Airtel, and Ola.
               </p>
               <p>
-                I specialize in the full AI/ML stack — from RAG pipelines and LLM inference to 
+                I specialize in the full AI/ML stack: from RAG pipelines and LLM inference to 
                 real-time feature serving, distributed systems, and full-stack React/TypeScript 
                 applications. My work serves institutional investors on Wall Street, hundreds of 
                 millions of e-commerce users, and millions of daily riders.

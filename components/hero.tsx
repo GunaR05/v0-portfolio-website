@@ -128,6 +128,23 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      {/* Floating gradient orbs */}
+      <motion.div 
+        className="absolute top-20 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00C2FF] to-transparent blur-[80px] opacity-[0.08] pointer-events-none"
+        animate={{ y: [0, -30, 0], rotate: [0, 90, 180] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute -bottom-20 right-20 w-96 h-96 rounded-full bg-gradient-to-br from-[#7B61FF] to-transparent blur-[80px] opacity-[0.08] pointer-events-none"
+        animate={{ y: [0, 30, 0], rotate: [0, -90, -180] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute top-1/2 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00E5C3] to-transparent blur-[80px] opacity-[0.08] pointer-events-none"
+        animate={{ y: [0, -20, 0], rotate: [0, 45, 90] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       {/* Background effects */}
       <div className="absolute inset-0 grid-background" />
       <div className="absolute inset-0 radial-glow" />
@@ -181,7 +198,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-muted-foreground max-w-xl leading-relaxed"
             >
-              I build AI systems that work in the real world — not just in notebooks. 
+              I build AI systems that work in the real world, not just in notebooks. 
               5+ years shipping production-grade ML infrastructure, LLM-powered agentic systems, 
               and distributed backends across fintech, e-commerce, telecom, and ride-hailing at scale.
             </motion.p>
@@ -274,18 +291,30 @@ export function Hero() {
                 {/* Stats row with count-up animation */}
                 <div className="mt-6 pt-4 border-t border-border">
                   <div className="flex items-center justify-between text-sm">
-                    <div className="text-center">
+                    <motion.div 
+                      className="text-center"
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    >
                       <span className="text-primary font-bold text-lg">{yearsCount}+</span>
                       <p className="text-muted-foreground text-xs">Years Experience</p>
-                    </div>
-                    <div className="text-center">
+                    </motion.div>
+                    <motion.div 
+                      className="text-center"
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    >
                       <span className="text-secondary font-bold text-lg">{reqCount}K+</span>
                       <p className="text-muted-foreground text-xs">Req/Min</p>
-                    </div>
-                    <div className="text-center">
+                    </motion.div>
+                    <motion.div 
+                      className="text-center"
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
                       <span className="text-accent font-bold text-lg">{companiesCount}</span>
                       <p className="text-muted-foreground text-xs">Companies</p>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>

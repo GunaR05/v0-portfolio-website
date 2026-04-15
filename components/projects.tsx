@@ -57,7 +57,7 @@ const projects = [
   {
     id: 1,
     title: "RAG Financial Research Platform",
-    description: "Built at Aiera — LLM inference pipelines and hybrid RAG retrieval (BM25 + vector search) for hedge funds and investment banks. 10,000+ req/min on AWS EKS with 35% P95 latency reduction.",
+    description: "Built at Aiera, LLM inference pipelines and hybrid RAG retrieval (BM25 + vector search) for hedge funds and investment banks. 10,000+ req/min on AWS EKS with 35% P95 latency reduction.",
     tags: ["LangChain", "OpenSearch", "Claude", "MCP"],
     category: "LLM",
     icon: Building2,
@@ -68,7 +68,7 @@ const projects = [
   {
     id: 2,
     title: "Fraud Detection System",
-    description: "Built at Airtel — Sub-50ms real-time fraud detection and credit risk decisioning for Airtel Payments Bank processing millions of daily UPI transactions with Kafka-driven event streaming.",
+    description: "Built at Airtel, Sub-50ms real-time fraud detection and credit risk decisioning for Airtel Payments Bank processing millions of daily UPI transactions with Kafka-driven event streaming.",
     tags: ["Kafka", "Deep Learning", "Real-time"],
     category: "MLOps",
     icon: Shield,
@@ -78,7 +78,7 @@ const projects = [
   {
     id: 3,
     title: "E-commerce ML Platform",
-    description: "Built at Flipkart — CTR prediction, ranking, and auction optimization sustaining 110+ orders/sec during Big Billion Days. Achieved 3x throughput improvement with Kubernetes autoscaling on Azure AKS.",
+    description: "Built at Flipkart, CTR prediction, ranking, and auction optimization sustaining 110+ orders/sec during Big Billion Days. Achieved 3x throughput improvement with Kubernetes autoscaling on Azure AKS.",
     tags: ["Spark", "Kubernetes", "Redis"],
     category: "Distributed",
     icon: ShoppingCart,
@@ -88,7 +88,7 @@ const projects = [
   {
     id: 4,
     title: "Driver Matching & Surge Pricing",
-    description: "Built at Ola — Real-time ML inference for dynamic surge pricing and driver matching across 250+ cities. Engineered fault-tolerant orchestration with eventual consistency across distributed microservices.",
+    description: "Built at Ola, Real-time ML inference for dynamic surge pricing and driver matching across 250+ cities. Engineered fault-tolerant orchestration with eventual consistency across distributed microservices.",
     tags: ["ML Inference", "Redis", "Microservices"],
     category: "Distributed",
     icon: Car,
@@ -191,6 +191,17 @@ export function Projects() {
                   boxShadow: "0 0 0 rgba(0, 194, 255, 0.3)"
                 }}
               >
+                {/* Shimmer effect on hover */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "100%" }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  style={{
+                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)",
+                  }}
+                />
+
                 {/* Hover glow border */}
                 <motion.div
                   className="absolute inset-0 rounded-2xl pointer-events-none"

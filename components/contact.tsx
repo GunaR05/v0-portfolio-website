@@ -36,7 +36,7 @@ const contactLinks = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Boston, MA — Open to NYC · SF · Seattle · Remote",
+          value: "Boston, MA, Open to NYC, SF, Seattle, Remote",
     href: null
   }
 ]
@@ -59,21 +59,39 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <motion.span 
+            className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Contact
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
+          </motion.span>
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Let&apos;s <span className="gradient-text">Build Together</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="mt-4 text-muted-foreground max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             Open to Senior SWE, Staff MLE, and AI Engineer roles. Let&apos;s connect.
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
