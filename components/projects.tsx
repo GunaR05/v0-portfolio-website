@@ -74,6 +74,7 @@ const projects = [
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState("All")
+  const [hoveredTagId, setHoveredTagId] = useState(null)
 
   const filteredProjects = projects.filter(
     (project) => activeFilter === "All" || project.category === activeFilter
@@ -128,18 +129,35 @@ export function Projects() {
         {/* Projects grid */}
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="group relative border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ scale: 1.03 }}
+                className="group relative border border-border rounded-2xl p-6 overflow-hidden transition-all duration-400"
+                style={{
+                  boxShadow: "0 0 0 rgba(0, 194, 255, 0.3)"
+                }}
               >
-                {/* Background image + overlay — always rendered */}
-                <div className="absolute inset-0 z-0">
+                {/* Hover glow border */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl pointer-events-none"
+                  initial={{ boxShadow: "0 0 0 rgba(0, 194, 255, 0)" }}
+                  whileHover={{ boxShadow: "0 0 20px rgba(0, 194, 255, 0.3)" }}
+                  transition={{ duration: 0.4 }}
+                />
+
+                {/* Background image + overlay */}
+                <motion.div
+                  className="absolute inset-0 z-0"
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                >
                   <Image
                     src={project.image}
                     alt=""
@@ -147,7 +165,7 @@ export function Projects() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.75)" }} />
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div className="relative z-10">
@@ -156,28 +174,31 @@ export function Projects() {
                     <project.icon className="h-6 w-6" style={{ color: "#00C2FF" }} />
                   </div>
 
-                  {/* Category badge */}
+                  {/* Category badge with pulse */}
                   <span
-                    className="inline-block px-2 py-1 text-xs rounded-md mb-2 font-semibold"
+                    className="inline-block px-2 py-1 text-xs rounded-md mb-2 font-semibold category-badge"
                     style={{ color: "#FFFFFF" }}
                   >
                     {project.category}
                   </span>
 
-                  {/* Tags */}
+                  {/* Tags with hover effect */}
                   <div className="flex flex-wrap gap-2 mb-3">
-                    {project.tags.map((tag) => (
-                      <span
+                    {project.tags.map((tag, tagIndex) => (
+                      <motion.span
                         key={tag}
-                        className="px-2 py-1 text-xs rounded-md border"
+                        className="px-2 py-1 text-xs rounded-md border cursor-pointer transition-all duration-200"
                         style={{
-                          background: "rgba(0,0,0,0.5)",
-                          color: "#00C2FF",
+                          background: hoveredTagId === `${project.id}-${tagIndex}` ? "#00C2FF" : "rgba(0,0,0,0.5)",
+                          color: hoveredTagId === `${project.id}-${tagIndex}` ? "#FFFFFF" : "#00C2FF",
                           borderColor: "#00C2FF",
                         }}
+                        whileHover={{ scale: 1.05 }}
+                        onMouseEnter={() => setHoveredTagId(`${project.id}-${tagIndex}`)}
+                        onMouseLeave={() => setHoveredTagId(null)}
                       >
                         {tag}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
@@ -208,16 +229,23 @@ export function Projects() {
 
                   {/* Actions */}
                   <div className="flex items-center justify-between">
-                    <a
+                    <motion.a
                       href="https://medium.com/@guna050998/why-most-ai-projects-fail-after-the-demo-c2522de95ce0"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-sm gap-1 group-hover:gap-2 transition-all"
+                      className="inline-flex items-center text-sm gap-1 transition-all"
                       style={{ color: "#00C2FF", fontWeight: 700 }}
+                      whileHover={{ color: "#00C2FF" }}
                     >
                       Case Study
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                      <motion.div
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 4 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ArrowRight className="h-4 w-4" />
+                      </motion.div>
+                    </motion.a>
                     <button className="p-2 transition-colors" style={{ color: "#E8F0FE" }}>
                       <Github className="h-5 w-5" />
                     </button>
