@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { Puzzle, Link2, Rocket, Target, Calendar, MapPin, Handshake } from "lucide-react"
+import { useRef } from "react"
 
 const timeline = [
   {
@@ -100,6 +101,9 @@ const specializations = [
 ]
 
 export function Experience() {
+  const timelineRef = useRef(null)
+  const isTimelineInView = useInView(timelineRef, { once: true, margin: "-100px" })
+
   return (
     <section id="experience" className="py-20 md:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,9 +125,14 @@ export function Experience() {
 
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-8">
           {/* Left - Timeline (2 columns) */}
-          <div className="lg:col-span-2 relative">
-            {/* Gradient vertical line */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block" />
+          <div ref={timelineRef} className="lg:col-span-2 relative">
+            {/* Animated gradient vertical line */}
+            <motion.div 
+              className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block origin-top"
+              initial={{ scaleY: 0 }}
+              animate={isTimelineInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            />
 
             <div className="space-y-8">
               {timeline.map((item, index) => (
@@ -135,8 +144,8 @@ export function Experience() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative md:pl-12"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-2 top-2 w-5 h-5 rounded-full bg-card border-2 border-primary hidden md:flex items-center justify-center">
+                  {/* Timeline dot with pulse */}
+                  <div className="absolute left-2 top-2 w-5 h-5 rounded-full bg-card border-2 border-primary hidden md:flex items-center justify-center timeline-dot-pulse">
                     <div className="w-2 h-2 rounded-full gradient-bg" />
                   </div>
 

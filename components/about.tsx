@@ -150,13 +150,16 @@ export function About() {
                     <span className="text-sm font-medium text-foreground">{skill.name}</span>
                     <span className="text-sm font-semibold text-primary">{skill.percentage}%</span>
                   </div>
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden relative">
                     <motion.div
-                      className="h-full gradient-bg rounded-full"
+                      className="h-full gradient-bg rounded-full relative"
                       initial={{ width: 0 }}
                       animate={isInView ? { width: `${skill.percentage}%` } : { width: 0 }}
                       transition={{ duration: 1, delay: 0.3 + index * 0.1, ease: "easeOut" }}
-                    />
+                    >
+                      {/* Glow dot at end of bar */}
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary skill-bar-glow" />
+                    </motion.div>
                   </div>
                 </motion.div>
               ))}

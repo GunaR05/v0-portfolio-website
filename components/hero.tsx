@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Download, ArrowDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react"
 
 // Pre-tokenized code lines to avoid hydration issues with regex
 const codeLines = [
@@ -33,7 +34,91 @@ const tokenColors: Record<string, string> = {
   plain: "inherit",
 }
 
+// Typewriter hook
+function useTypewriter(text: string, speed: number = 50, delay: number = 0) {
+  const [displayText, setDisplayText] = useState("")
+  const [isComplete, setIsComplete] = useState(false)
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+    let charIndex = 0
+
+    const startTyping = () => {
+      if (charIndex < text.length) {
+        setDisplayText(text.slice(0, charIndex + 1))
+        charIndex++
+        timeout = setTimeout(startTyping, speed)
+      } else {
+        setIsComplete(true)
+      }
+    }
+
+    const delayTimeout = setTimeout(startTyping, delay)
+
+    return () => {
+      clearTimeout(timeout)
+      clearTimeout(delayTimeout)
+    }
+  }, [text, speed, delay])
+
+  return { displayText, isComplete }
+}
+
+// Counter hook for count-up animation
+function useCounter(target: number, duration: number = 2000, delay: number = 0) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    let startTime: number
+    let animationFrame: number
+
+    const startAnimation = () => {
+      const animate = (timestamp: number) => {
+        if (!startTime) startTime = timestamp
+        const progress = Math.min((timestamp - startTime) / duration, 1)
+        setCount(Math.floor(progress * target))
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(animate)
+        }
+      }
+      animationFrame = requestAnimationFrame(animate)
+    }
+
+    const delayTimeout = setTimeout(startAnimation, delay)
+
+    return () => {
+      clearTimeout(delayTimeout)
+      cancelAnimationFrame(animationFrame)
+    }
+  }, [target, duration, delay])
+
+  return count
+}
+
 export function Hero() {
+  const { displayText, isComplete } = useTypewriter(
+    "Senior Software Engineer & Applied AI Systems Engineer",
+    40,
+    800
+  )
+  
+  const yearsCount = useCounter(5, 1500, 1200)
+  const reqCount = useCounter(10, 1500, 1400)
+  const companiesCount = useCounter(4, 1500, 1600)
+
+  const [visibleLines, setVisibleLines] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleLines((prev) => {
+        if (prev < codeLines.length) return prev + 1
+        clearInterval(interval)
+        return prev
+      })
+    }, 150)
+    return () => clearInterval(interval)
+  }, [])
+
   const scrollToProjects = () => {
     const element = document.querySelector("#projects")
     if (element) {
@@ -78,15 +163,16 @@ export function Hero() {
               </h1>
             </motion.div>
 
-            {/* Subtitle */}
-            <motion.p
+            {/* Subtitle with typewriter effect */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-primary font-semibold"
+              className="text-xl md:text-2xl text-primary font-semibold h-8"
             >
-              Senior Software Engineer & Applied AI Systems Engineer
-            </motion.p>
+              <span>{displayText}</span>
+              <span className={`cursor-blink ${isComplete ? 'opacity-0' : ''}`}>|</span>
+            </motion.div>
 
             {/* UVP paragraph */}
             <motion.p
@@ -150,11 +236,20 @@ export function Hero() {
                   <span className="ml-4 text-sm text-muted-foreground font-mono">rag_pipeline.py</span>
                 </div>
                 
-                {/* Code content */}
+                {/* Code content with animated lines */}
                 <pre className="text-sm font-mono overflow-x-auto">
                   <code>
-                    {codeLines.map((line) => (
-                      <div key={line.lineNum} className="leading-6">
+                    {codeLines.map((line, lineIndex) => (
+                      <motion.div 
+                        key={line.lineNum} 
+                        className="leading-6"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ 
+                          opacity: lineIndex < visibleLines ? 1 : 0,
+                          x: lineIndex < visibleLines ? 0 : -10
+                        }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <span className="text-muted-foreground mr-4 select-none">
                           {String(line.lineNum).padStart(2, " ")}
                         </span>
@@ -167,24 +262,28 @@ export function Hero() {
                             </span>
                           ))
                         )}
-                      </div>
+                        {/* Green cursor on current line */}
+                        {lineIndex === visibleLines - 1 && visibleLines < codeLines.length && (
+                          <span className="cursor-blink text-green-500 ml-1">|</span>
+                        )}
+                      </motion.div>
                     ))}
                   </code>
                 </pre>
 
-                {/* Stats row */}
+                {/* Stats row with count-up animation */}
                 <div className="mt-6 pt-4 border-t border-border">
                   <div className="flex items-center justify-between text-sm">
                     <div className="text-center">
-                      <span className="text-primary font-bold text-lg">5+</span>
+                      <span className="text-primary font-bold text-lg">{yearsCount}+</span>
                       <p className="text-muted-foreground text-xs">Years Experience</p>
                     </div>
                     <div className="text-center">
-                      <span className="text-secondary font-bold text-lg">10K+</span>
+                      <span className="text-secondary font-bold text-lg">{reqCount}K+</span>
                       <p className="text-muted-foreground text-xs">Req/Min</p>
                     </div>
                     <div className="text-center">
-                      <span className="text-accent font-bold text-lg">4</span>
+                      <span className="text-accent font-bold text-lg">{companiesCount}</span>
                       <p className="text-muted-foreground text-xs">Companies</p>
                     </div>
                   </div>

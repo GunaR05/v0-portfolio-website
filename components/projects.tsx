@@ -1,10 +1,55 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, Github, Building2, Shield, ShoppingCart, Car, BarChart3, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+
+// Generate particles for background
+function ParticleBackground() {
+  const particles = useMemo(() => {
+    return Array.from({ length: 40 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      color: Math.random() > 0.5 ? "#00C2FF" : "#7B61FF",
+      duration: Math.random() * 4 + 3,
+      delay: Math.random() * 2,
+    }))
+  }, [])
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
+            opacity: 0.3,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 15, -10, 0],
+            opacity: [0.2, 0.5, 0.3, 0.2],
+          }}
+          transition={{
+            duration: particle.duration,
+            delay: particle.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  )
+}
 
 const filters = ["All", "LLM", "MLOps", "Distributed"]
 
@@ -81,8 +126,11 @@ export function Projects() {
   )
 
   return (
-    <section id="projects" className="py-20 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Floating particles */}
+      <ParticleBackground />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -17,6 +17,7 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -24,8 +25,27 @@ export function Navbar() {
     setMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+
+      // Active section detection
+      const sections = navLinks.map(link => link.href.replace("#", ""))
+      let currentSection = ""
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            currentSection = section
+            break
+          }
+        }
+      }
+
+      setActiveSection(currentSection)
     }
+
     window.addEventListener("scroll", handleScroll)
+    handleScroll() // Initial check
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -64,17 +84,32 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <motion.button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-              >
-                {link.label}
-              </motion.button>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "")
+              return (
+                <motion.button
+                  key={link.href}
+                  onClick={() => scrollToSection(link.href)}
+                  className={`relative text-muted-foreground hover:text-foreground transition-colors font-medium ${
+                    isActive ? "text-primary nav-link-active" : ""
+                  }`}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 0 }}
+                >
+                  {link.label}
+                  {/* Active indicator underline */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeSection"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 gradient-bg rounded-full"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </motion.button>
+              )
+            })}
           </div>
 
           {/* Right side buttons */}
@@ -135,16 +170,23 @@ export function Navbar() {
             className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border"
           >
             <div className="px-4 py-4 space-y-3">
-              {navLinks.map((link) => (
-                <motion.button
-                  key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors"
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {link.label}
-                </motion.button>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace("#", "")
+                return (
+                  <motion.button
+                    key={link.href}
+                    onClick={() => scrollToSection(link.href)}
+                    className={`block w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                      isActive
+                        ? "text-primary bg-primary/10"
+                        : "text-foreground hover:bg-muted"
+                    }`}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {link.label}
+                  </motion.button>
+                )
+              })}
               <Button
                 onClick={() => scrollToSection("#contact")}
                 className="w-full gradient-bg text-white font-semibold mt-4"
