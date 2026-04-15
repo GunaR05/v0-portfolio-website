@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, Github, Building2, Shield, ShoppingCart, Car, BarChart3, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 const filters = ["All", "LLM", "MLOps", "Distributed"]
 
@@ -16,7 +17,8 @@ const projects = [
     category: "LLM",
     icon: Building2,
     gradient: "from-blue-950/80 to-blue-900/40",
-    badge: "Aiera x Anthropic"
+    badge: "Aiera x Anthropic",
+    image: "/rag-pipeline.jpg"
   },
   {
     id: 2,
@@ -34,7 +36,8 @@ const projects = [
     tags: ["Spark", "Kubernetes", "Redis"],
     category: "Distributed",
     icon: ShoppingCart,
-    gradient: "from-teal-950/80 to-teal-900/40"
+    gradient: "from-teal-950/80 to-teal-900/40",
+    image: "/distributed-network.jpg"
   },
   {
     id: 4,
@@ -61,7 +64,8 @@ const projects = [
     tags: ["FAISS", "Sentence Transformers", "FastAPI"],
     category: "LLM",
     icon: Search,
-    gradient: "from-purple-950/80 to-purple-900/40"
+    gradient: "from-purple-950/80 to-purple-900/40",
+    image: "/llm-brain.jpg"
   }
 ]
 
@@ -129,12 +133,27 @@ export function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className={`group relative bg-gradient-to-br ${project.gradient} border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300`}
+                className={`group relative bg-gradient-to-br ${project.gradient} border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 overflow-hidden`}
               >
-                {/* Icon */}
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <project.icon className="h-6 w-6 text-primary" />
-                </div>
+                {/* Background image with overlay */}
+                {project.image && (
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src={project.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[rgba(0,0,0,0.55)]" />
+                  </div>
+                )}
+
+                {/* Content wrapper */}
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <project.icon className="h-6 w-6 text-primary" />
+                  </div>
 
                 {/* Category badge */}
                 <span className="inline-block px-2 py-1 text-xs bg-background/50 text-primary rounded-md mb-2">
@@ -173,14 +192,20 @@ export function Projects() {
                 )}
 
                 {/* Actions */}
-                <div className="flex items-center justify-between">
-                  <button className="inline-flex items-center text-primary font-medium text-sm group-hover:gap-2 transition-all">
-                    Case Study
-                    <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
-                    <Github className="h-5 w-5" />
-                  </button>
+                  <div className="flex items-center justify-between">
+                    <a 
+                      href="https://medium.com/@guna050998/why-most-ai-projects-fail-after-the-demo-c2522de95ce0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-primary font-medium text-sm group-hover:gap-2 transition-all"
+                    >
+                      Case Study
+                      <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                    <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
+                      <Github className="h-5 w-5" />
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             ))}

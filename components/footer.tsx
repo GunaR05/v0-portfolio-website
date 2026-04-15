@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, Newspaper } from "lucide-react"
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -14,6 +14,7 @@ const socialLinks = [
   { icon: Github, href: "https://github.com/gunashree-rajakumar", label: "GitHub" },
   { icon: Linkedin, href: "https://linkedin.com/in/rajakumargunashree", label: "LinkedIn" },
   { icon: Mail, href: "mailto:rajakumar.g@northeastern.edu", label: "Email" },
+  { icon: Newspaper, href: "https://gunashree.substack.com", label: "Systems That Scale" },
 ]
 
 export function Footer() {
