@@ -417,19 +417,85 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right content - Code card */}
+          {/* Right content - Code card with animated background */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative hidden lg:block"
           >
+            {/* Animated data flow lines behind card */}
+            <div className="absolute inset-0 -z-5 pointer-events-none">
+              {[...Array(6)].map((_, i) => (
+                <div key={`line-${i}`} className="absolute w-full h-px" style={{ top: `${20 + i * 15}%`, backgroundColor: "rgba(0,194,255,0.1)" }}>
+                  {/* Glowing dots flowing along line */}
+                  {[...Array(3)].map((_, dotIdx) => (
+                    <motion.div
+                      key={`dot-${dotIdx}`}
+                      className="absolute w-1 h-1 bg-[#00C2FF] rounded-full"
+                      style={{
+                        boxShadow: "0 0 8px #00C2FF",
+                        top: "-1.5px"
+                      }}
+                      animate={{ x: ["-100%", "100%"] }}
+                      transition={{
+                        duration: 2 + (dotIdx * 0.5),
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: (dotIdx * 0.6) + (i * 0.1)
+                      }}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Floating tech badges around card */}
+            <div className="absolute inset-0 -z-5 pointer-events-none">
+              {[
+                { text: "PY", top: "-30px", left: "-40px" },
+                { text: "AI", top: "50%", right: "-60px" },
+                { text: "{}", bottom: "80px", left: "-50px" },
+                { text: "RAG", top: "20px", right: "-70px" },
+                { text: "LLM", bottom: "20px", right: "-50px" },
+                { text: "API", top: "40%", left: "-60px" }
+              ].map((badge, idx) => (
+                <motion.div
+                  key={idx}
+                  className="absolute px-2 py-1 rounded border border-[#00C2FF] bg-background/50 text-xs font-mono text-[#00C2FF] backdrop-blur-sm"
+                  style={{
+                    top: badge.top,
+                    bottom: badge.bottom,
+                    left: badge.left,
+                    right: badge.right,
+                    opacity: 0.6
+                  }}
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{
+                    duration: 3 + (idx * 0.3),
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: idx * 0.15
+                  }}
+                >
+                  {badge.text}
+                </motion.div>
+              ))}
+            </div>
+
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="bg-card border border-border rounded-2xl p-6 shadow-2xl">
+              {/* Grid wave pulse effect behind card */}
+              <div className="absolute inset-0 -z-10 rounded-2xl grid-wave" style={{
+                backgroundImage: 'linear-gradient(rgba(0, 194, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 194, 255, 0.03) 1px, transparent 1px)',
+                backgroundSize: '50px 50px'
+              }} />
+
+              {/* Code card with glow animation */}
+              <div className="bg-card border border-border rounded-2xl p-6 shadow-2xl card-glow">
                 {/* Code header */}
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
