@@ -27,7 +27,8 @@ const projects = [
     tags: ["Kafka", "Deep Learning", "Real-time"],
     category: "MLOps",
     icon: Shield,
-    gradient: "from-violet-950/80 to-violet-900/40"
+    gradient: "from-violet-950/80 to-violet-900/40",
+    image: "/distributed-network.jpg"
   },
   {
     id: 3,
@@ -37,7 +38,7 @@ const projects = [
     category: "Distributed",
     icon: ShoppingCart,
     gradient: "from-teal-950/80 to-teal-900/40",
-    image: "/distributed-network.jpg"
+    image: "/llm-brain.jpg"
   },
   {
     id: 4,
@@ -46,7 +47,8 @@ const projects = [
     tags: ["ML Inference", "Redis", "Microservices"],
     category: "Distributed",
     icon: Car,
-    gradient: "from-green-950/80 to-green-900/40"
+    gradient: "from-green-950/80 to-green-900/40",
+    image: "/rag-pipeline.jpg"
   },
   {
     id: 5,
@@ -55,7 +57,8 @@ const projects = [
     tags: ["OpenTelemetry", "Prometheus", "Grafana"],
     category: "MLOps",
     icon: BarChart3,
-    gradient: "from-orange-950/80 to-orange-900/40"
+    gradient: "from-orange-950/80 to-orange-900/40",
+    image: "/distributed-network.jpg"
   },
   {
     id: 6,
@@ -133,76 +136,89 @@ export function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className={`group relative bg-gradient-to-br ${project.gradient} border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 overflow-hidden`}
+                className="group relative border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 overflow-hidden"
               >
-                {/* Background image with overlay */}
-                {project.image && (
-                  <div className="absolute inset-0 z-0">
-                    <Image
-                      src={project.image}
-                      alt=""
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[rgba(0,0,0,0.55)]" />
-                  </div>
-                )}
-
-                {/* Content wrapper */}
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <project.icon className="h-6 w-6 text-primary" />
-                  </div>
-
-                {/* Category badge */}
-                <span className="inline-block px-2 py-1 text-xs bg-background/50 text-primary rounded-md mb-2">
-                  {project.category}
-                </span>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs bg-muted/50 text-muted-foreground rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                {/* Background image + overlay — always rendered */}
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.75)" }} />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-foreground mb-2 font-[family-name:var(--font-poppins)]">
-                  {project.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Badge if exists */}
-                {project.badge && (
-                  <div className="mb-4">
-                    <span className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">
-                      <span>🤝</span> {project.badge}
-                    </span>
+                {/* Content */}
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4">
+                    <project.icon className="h-6 w-6" style={{ color: "#00C2FF" }} />
                   </div>
-                )}
 
-                {/* Actions */}
+                  {/* Category badge */}
+                  <span
+                    className="inline-block px-2 py-1 text-xs rounded-md mb-2 font-semibold"
+                    style={{ color: "#FFFFFF" }}
+                  >
+                    {project.category}
+                  </span>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 text-xs rounded-md border"
+                        style={{
+                          background: "rgba(0,0,0,0.5)",
+                          color: "#00C2FF",
+                          borderColor: "#00C2FF",
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Title */}
+                  <h3
+                    className="text-xl mb-2 font-[family-name:var(--font-poppins)]"
+                    style={{ color: "#FFFFFF", fontWeight: 800 }}
+                  >
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    className="text-sm mb-6 leading-relaxed"
+                    style={{ color: "#E8F0FE" }}
+                  >
+                    {project.description}
+                  </p>
+
+                  {/* Badge if exists */}
+                  {project.badge && (
+                    <div className="mb-4">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium bg-white/10 rounded-full border border-white/20" style={{ color: "#FFFFFF" }}>
+                        <span>🤝</span> {project.badge}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Actions */}
                   <div className="flex items-center justify-between">
-                    <a 
+                    <a
                       href="https://medium.com/@guna050998/why-most-ai-projects-fail-after-the-demo-c2522de95ce0"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-primary font-medium text-sm group-hover:gap-2 transition-all"
+                      className="inline-flex items-center text-sm gap-1 group-hover:gap-2 transition-all"
+                      style={{ color: "#00C2FF", fontWeight: 700 }}
                     >
                       Case Study
-                      <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </a>
-                    <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
+                    <button className="p-2 transition-colors" style={{ color: "#E8F0FE" }}>
                       <Github className="h-5 w-5" />
                     </button>
                   </div>
