@@ -1,9 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Download, ArrowDown } from "lucide-react"
+import { motion, useMotionValue, useSpring } from "framer-motion"
+import { Download, ArrowDown, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 
 // Pre-tokenized code lines to avoid hydration issues with regex
 const codeLines = [
@@ -32,6 +32,66 @@ const tokenColors: Record<string, string> = {
   comment: "#8BA3BC",
   method: "#00C2FF",
   plain: "inherit",
+}
+
+// Matrix rain characters
+const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]|;:,./<>?".split("")
+
+// Matrix Rain Column component
+function MatrixColumn({ x, delay }: { x: number; delay: number }) {
+  const chars = useMemo(() => 
+    Array.from({ length: 15 }, () => matrixChars[Math.floor(Math.random() * matrixChars.length)]),
+    []
+  )
+  const duration = useMemo(() => 3 + Math.random() * 3, [])
+
+  return (
+    <motion.div
+      className="absolute text-[#00C2FF] text-xs font-mono opacity-[0.04] pointer-events-none select-none"
+      style={{ left: `${x}%` }}
+      initial={{ y: -200 }}
+      animate={{ y: "100vh" }}
+      transition={{
+        duration,
+        delay,
+        repeat: Infinity,
+        ease: "linear"
+      }}
+    >
+      {chars.map((char, i) => (
+        <div key={i} className="leading-4">{char}</div>
+      ))}
+    </motion.div>
+  )
+}
+
+// Badge Sparkle component
+function BadgeSparkle({ delay }: { delay: number }) {
+  const positions = useMemo(() => ({
+    x: -20 + Math.random() * 140,
+    y: -10 + Math.random() * 30
+  }), [])
+
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={{ left: positions.x, top: positions.y }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: [0, 1, 0],
+        scale: [0, 1, 0],
+        rotate: [0, 180]
+      }}
+      transition={{
+        duration: 1,
+        delay,
+        repeat: Infinity,
+        repeatDelay: 2 + Math.random()
+      }}
+    >
+      <Sparkles className="w-3 h-3 text-[#00C2FF]" />
+    </motion.div>
+  )
 }
 
 // Typewriter hook
@@ -95,6 +155,33 @@ function useCounter(target: number, duration: number = 2000, delay: number = 0) 
   return count
 }
 
+// Magnetic button hook
+function useMagneticHover(strength: number = 25) {
+  const ref = useRef<HTMLDivElement>(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 150, damping: 15 })
+  const springY = useSpring(y, { stiffness: 150, damping: 15 })
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    const deltaX = (e.clientX - centerX) / rect.width * strength
+    const deltaY = (e.clientY - centerY) / rect.height * strength
+    x.set(deltaX)
+    y.set(deltaY)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return { ref, springX, springY, handleMouseMove, handleMouseLeave }
+}
+
 export function Hero() {
   const { displayText, isComplete } = useTypewriter(
     "Senior Software Engineer & Applied AI Systems Engineer",
@@ -107,6 +194,27 @@ export function Hero() {
   const companiesCount = useCounter(4, 1500, 1600)
 
   const [visibleLines, setVisibleLines] = useState(0)
+
+  // Matrix rain columns
+  const matrixColumns = useMemo(() => 
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: (i / 20) * 100,
+      delay: Math.random() * 5
+    })),
+    []
+  )
+
+  // Badge sparkles
+  const sparkles = useMemo(() => [
+    { id: 1, delay: 0 },
+    { id: 2, delay: 1 },
+    { id: 3, delay: 2 }
+  ], [])
+
+  // Magnetic buttons
+  const viewWorkMagnetic = useMagneticHover(25)
+  const downloadCVMagnetic = useMagneticHover(20)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,6 +236,23 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      {/* Matrix rain background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {matrixColumns.map((col) => (
+          <MatrixColumn key={col.id} x={col.x} delay={col.delay} />
+        ))}
+      </div>
+
+      {/* Background pulse animation */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(0,194,255,0.05) 0%, transparent 70%)"
+        }}
+        animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       {/* Floating gradient orbs */}
       <motion.div 
         className="absolute top-20 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00C2FF] to-transparent blur-[80px] opacity-[0.05] pointer-events-none"
@@ -153,13 +278,17 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left content */}
           <div className="space-y-8">
-            {/* Availability badge */}
+            {/* Availability badge with sparkles */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border"
+              className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border"
             >
+              {/* Sparkles around badge */}
+              {sparkles.map((sparkle) => (
+                <BadgeSparkle key={sparkle.id} delay={sparkle.delay} />
+              ))}
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -167,18 +296,33 @@ export function Hero() {
               <span className="text-sm text-muted-foreground">Available for Opportunities</span>
             </motion.div>
 
-            {/* Main heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-poppins)] leading-tight">
-                Gunashree
+            {/* Main heading with clip-path reveal */}
+            <div>
+              <motion.h1 
+                className="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-poppins)] leading-tight"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.span
+                  className="inline-block"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
+                  Gunashree
+                </motion.span>
                 <br />
-                <span className="gradient-text">Rajakumar</span>
-              </h1>
-            </motion.div>
+                <motion.span
+                  className="inline-block gradient-text"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                >
+                  Rajakumar
+                </motion.span>
+              </motion.h1>
+            </div>
 
             {/* Subtitle with typewriter effect */}
             <motion.div
@@ -203,32 +347,73 @@ export function Hero() {
               and distributed backends across fintech, e-commerce, telecom, and ride-hailing at scale.
             </motion.p>
 
-            {/* CTA buttons */}
+            {/* CTA buttons with magnetic hover and animations */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-wrap gap-4"
             >
-              <Button
-                onClick={scrollToProjects}
-                size="lg"
-                className="gradient-bg text-white font-semibold hover:opacity-90 transition-opacity"
+              {/* View My Work - Animated gradient button */}
+              <motion.div
+                ref={viewWorkMagnetic.ref}
+                style={{ x: viewWorkMagnetic.springX, y: viewWorkMagnetic.springY }}
+                onMouseMove={viewWorkMagnetic.handleMouseMove}
+                onMouseLeave={viewWorkMagnetic.handleMouseLeave}
               >
-                View My Work
-                <ArrowDown className="ml-2 h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-border hover:bg-muted"
-                asChild
+                <Button
+                  onClick={scrollToProjects}
+                  size="lg"
+                  className="relative overflow-hidden text-white font-semibold group"
+                >
+                  {/* Animated gradient background */}
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-[#00C2FF] via-[#7B61FF] to-[#00C2FF] bg-[size:200%_100%]"
+                    animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  />
+                  <span className="relative z-10 flex items-center">
+                    View My Work
+                    <ArrowDown className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+                  </span>
+                </Button>
+              </motion.div>
+
+              {/* Download CV - Border trace animation */}
+              <motion.div
+                ref={downloadCVMagnetic.ref}
+                style={{ x: downloadCVMagnetic.springX, y: downloadCVMagnetic.springY }}
+                onMouseMove={downloadCVMagnetic.handleMouseMove}
+                onMouseLeave={downloadCVMagnetic.handleMouseLeave}
               >
-                <a href="https://drive.google.com/uc?export=download&id=1mjO0TQ3qORy1HZu-sOa1TC4cxfrm_XEb" download>
-                  <Download className="mr-2 h-4 w-4" />
-                  Download CV
-                </a>
-              </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="relative overflow-hidden border-transparent hover:bg-muted group"
+                  asChild
+                >
+                  <a href="https://drive.google.com/uc?export=download&id=1mjO0TQ3qORy1HZu-sOa1TC4cxfrm_XEb" download>
+                    {/* Border trace animation */}
+                    <span className="absolute inset-0 rounded-md">
+                      <motion.span
+                        className="absolute inset-0 rounded-md"
+                        style={{
+                          background: "linear-gradient(90deg, #00C2FF, #7B61FF, #00C2FF)",
+                          backgroundSize: "200% 100%",
+                          padding: "1px",
+                          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                          WebkitMaskComposite: "xor",
+                          maskComposite: "exclude"
+                        }}
+                        animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      />
+                    </span>
+                    <Download className="mr-2 h-4 w-4 relative z-10" />
+                    <span className="relative z-10">Download CV</span>
+                  </a>
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
 
