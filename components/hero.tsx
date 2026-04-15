@@ -273,6 +273,117 @@ export function Hero() {
       {/* Background effects */}
       <div className="absolute inset-0 grid-background" />
       <div className="absolute inset-0 radial-glow" />
+
+      {/* ANIMATION 1: Neural Network */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60" style={{ filter: "drop-shadow(0 0 20px rgba(0,194,255,0.05))" }}>
+        <defs>
+          <filter id="neural-glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        {/* Neural nodes */}
+        {[
+          { cx: "15%", cy: "20%" }, { cx: "85%", cy: "15%" }, { cx: "50%", cy: "10%" },
+          { cx: "10%", cy: "50%" }, { cx: "45%", cy: "45%" }, { cx: "90%", cy: "55%" },
+          { cx: "20%", cy: "85%" }, { cx: "75%", cy: "80%" }, { cx: "50%", cy: "90%" },
+          { cx: "30%", cy: "35%" }, { cx: "70%", cy: "40%" }, { cx: "60%", cy: "65%" }
+        ].map((node, i) => (
+          <circle key={`node-${i}`} cx={node.cx} cy={node.cy} r="5" fill="#00C2FF" opacity="0.15" className="neural-node" filter="url(#neural-glow)" />
+        ))}
+        {/* Connecting lines with pulsing effect */}
+        {[
+          { x1: "15%", y1: "20%", x2: "45%", y2: "45%" },
+          { x1: "85%", y1: "15%", x2: "45%", y2: "45%" },
+          { x1: "50%", y1: "10%", x2: "45%", y2: "45%" },
+          { x1: "10%", y1: "50%", x2: "45%", y2: "45%" },
+          { x1: "90%", y1: "55%", x2: "45%", y2: "45%" },
+          { x1: "45%", y1: "45%", x2: "20%", y2: "85%" },
+          { x1: "45%", y1: "45%", x2: "75%", y2: "80%" },
+          { x1: "45%", y1: "45%", x2: "50%", y2: "90%" }
+        ].map((line, i) => (
+          <line key={`line-${i}`} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#00C2FF" strokeWidth="1" className="neural-line" opacity="0.08" />
+        ))}
+        {/* Traveling dots along lines */}
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+          <circle key={`dot-${i}`} r="3" fill="white" opacity="0.6" className="neural-dot" style={{
+            offsetPath: `path('M ${["15% 20%, 45% 45%", "85% 15%, 45% 45%", "50% 10%, 45% 45%", "10% 50%, 45% 45%", "90% 55%, 45% 45%", "45% 45%, 20% 85%", "45% 45%, 75% 80%", "45% 45%, 50% 90%"][i]}')`,
+            animation: `dot-travel ${3 + i * 0.3}s linear infinite`
+          }} />
+        ))}
+      </svg>
+
+      {/* ANIMATION 2: Vertical scan lines */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[0, 1, 2].map((i) => (
+          <motion.div 
+            key={`scan-${i}`}
+            className="absolute w-px h-full bg-[rgba(0,194,255,0.04)]"
+            animate={{ x: ["100vw", "-100vw"] }}
+            transition={{
+              duration: [8, 12, 16][i],
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            style={{ left: 0 }}
+          />
+        ))}
+      </div>
+
+      {/* ANIMATION 3: Hexagon grid background (left side only) */}
+      <div className="absolute left-0 top-0 w-1/2 h-full pointer-events-none overflow-hidden opacity-30">
+        <svg className="absolute inset-0 w-full h-full hex-grid" style={{ animation: "hex-rotate 360s linear infinite" }}>
+          <defs>
+            <pattern id="hexagons" x="60" y="60" patternUnits="userSpaceOnUse">
+              <polygon points="30,0 60,17.32 60,51.96 30,69.28 0,51.96 0,17.32" fill="none" stroke="rgba(0,194,255,0.03)" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hexagons)"/>
+        </svg>
+      </div>
+
+      {/* ANIMATION 4: Rising particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute w-1 h-1 rounded-full rise-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              bottom: 0,
+              backgroundColor: Math.random() > 0.5 ? "#00C2FF" : "#7B61FF",
+              opacity: Math.random() * 0.2 + 0.2,
+              "--particle-drift": `${(Math.random() - 0.5) * 100}px` as any,
+              animation: `rise-particle ${6 + Math.random() * 6}s linear infinite`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ANIMATION 5: Ambient light beams */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[0, 1].map((i) => (
+          <motion.div
+            key={`beam-${i}`}
+            className="absolute light-beam"
+            style={{
+              width: "200px",
+              height: "100vh",
+              background: "linear-gradient(90deg, transparent, rgba(0,194,255,0.03), transparent)",
+              transform: "skew(-30deg)",
+              left: 0,
+              top: 0,
+              filter: "blur(40px)",
+              animation: `beam-move ${15 + i * 5}s linear infinite`,
+              animationDelay: `${i * 7.5}s`
+            }}
+          />
+        ))}
+      </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

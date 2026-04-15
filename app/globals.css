@@ -290,3 +290,83 @@
 .float-badge {
   animation: float-badge ease-in-out infinite;
 }
+
+/* Scan lines moving right to left */
+@keyframes scan-line {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100vw); }
+}
+
+.scan-line {
+  animation: scan-line linear infinite;
+}
+
+/* Hexagon grid rotation */
+@keyframes hex-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hex-grid {
+  animation: hex-rotate linear infinite;
+}
+
+/* Rising particles */
+@keyframes rise-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(var(--particle-drift));
+    opacity: 0;
+  }
+}
+
+.rise-particle {
+  animation: rise-particle linear infinite;
+}
+
+/* Light beam movement */
+@keyframes beam-move {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.light-beam {
+  animation: beam-move linear infinite;
+}
+
+/* Neural network pulse */
+@keyframes node-pulse {
+  0%, 100% { opacity: 0.15; r: 5px; }
+  50% { opacity: 0.3; r: 7px; }
+}
+
+@keyframes line-pulse {
+  0%, 100% { stroke-opacity: 0.08; }
+  50% { stroke-opacity: 0.15; }
+}
+
+@keyframes dot-travel {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+.neural-node {
+  animation: node-pulse ease-in-out infinite;
+}
+
+.neural-line {
+  animation: line-pulse ease-in-out infinite;
+}
+
+.neural-dot {
+  animation: dot-travel linear infinite;
+}
