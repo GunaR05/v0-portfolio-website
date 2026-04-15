@@ -98,7 +98,7 @@ function useCounter(target: number, duration: number = 2000, delay: number = 0) 
 export function Hero() {
   const { displayText, isComplete } = useTypewriter(
     "Senior Software Engineer & Applied AI Systems Engineer",
-    40,
+    60,
     800
   )
   
@@ -130,17 +130,17 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Floating gradient orbs */}
       <motion.div 
-        className="absolute top-20 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00C2FF] to-transparent blur-[80px] opacity-[0.08] pointer-events-none"
+        className="absolute top-20 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00C2FF] to-transparent blur-[80px] opacity-[0.05] pointer-events-none"
         animate={{ y: [0, -30, 0], rotate: [0, 90, 180] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute -bottom-20 right-20 w-96 h-96 rounded-full bg-gradient-to-br from-[#7B61FF] to-transparent blur-[80px] opacity-[0.08] pointer-events-none"
+        className="absolute -bottom-20 right-20 w-96 h-96 rounded-full bg-gradient-to-br from-[#7B61FF] to-transparent blur-[80px] opacity-[0.05] pointer-events-none"
         animate={{ y: [0, 30, 0], rotate: [0, -90, -180] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute top-1/2 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00E5C3] to-transparent blur-[80px] opacity-[0.08] pointer-events-none"
+        className="absolute top-1/2 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-[#00E5C3] to-transparent blur-[80px] opacity-[0.05] pointer-events-none"
         animate={{ y: [0, -20, 0], rotate: [0, 45, 90] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />

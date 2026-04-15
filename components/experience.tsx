@@ -143,7 +143,7 @@ export function Experience() {
               className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block origin-top"
               initial={{ scaleY: 0 }}
               animate={isTimelineInView ? { scaleY: 1 } : { scaleY: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              transition={{ duration: 2, ease: "easeOut" }}
             />
 
             <div className="space-y-8">

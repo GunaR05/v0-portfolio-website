@@ -59,24 +59,81 @@ export function About() {
           transition={{ duration: 0.5 }}
           className="flex flex-col md:flex-row items-center gap-8 mb-16"
         >
-          {/* Profile Image */}
-          <div className="flex-shrink-0">
-            <motion.div 
-              className="relative w-[200px] h-[200px] rounded-full p-[3px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF]"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 4, repeat: Infinity, linear: true }}
-            >
-              <div className="w-full h-full rounded-full overflow-hidden bg-background">
-                <Image
-                  src="/profile.jpg"
-                  alt="Gunashree Rajakumar"
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-            </motion.div>
+          {/* Profile Image with new styling */}
+          <div className="flex-shrink-0 relative">
+            {/* Background grid and glow */}
+            <div className="absolute -inset-12 pointer-events-none">
+              <div className="absolute inset-0 grid-background rounded-full opacity-50" />
+              <motion.div 
+                className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00C2FF] to-transparent blur-[40px] opacity-[0.06]"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+
+            {/* Main profile container */}
+            <div className="relative">
+              {/* Corner accent frames */}
+              <svg className="absolute -inset-6 w-[252px] h-[252px] pointer-events-none" viewBox="0 0 252 252">
+                {/* Top-left corner */}
+                <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                  <line x1="10" y1="0" x2="10" y2="40" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                </motion.g>
+                {/* Top-right corner */}
+                <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }}>
+                  <line x1="242" y1="0" x2="242" y2="40" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="212" y1="10" x2="252" y2="10" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                </motion.g>
+                {/* Bottom-left corner */}
+                <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
+                  <line x1="10" y1="212" x2="10" y2="252" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="0" y1="242" x2="40" y2="242" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                </motion.g>
+                {/* Bottom-right corner */}
+                <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
+                  <line x1="242" y1="212" x2="242" y2="252" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="212" y1="242" x2="252" y2="242" stroke="#00C2FF" strokeWidth="2" strokeLinecap="round" />
+                </motion.g>
+              </svg>
+
+              {/* Profile photo */}
+              <motion.div 
+                className="relative w-[220px] h-[220px] rounded-full p-[3px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF]"
+                animate={{ y: [-8, 0, -8] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <motion.div 
+                  className="w-full h-full rounded-full overflow-hidden bg-background relative"
+                  whileHover={{ boxShadow: "0 0 40px rgba(0,194,255,0.4)" }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  style={{ 
+                    boxShadow: "0 0 40px rgba(0,194,255,0.2)"
+                  }}
+                >
+                  <Image
+                    src="/profile.jpg"
+                    alt="Gunashree Rajakumar"
+                    width={220}
+                    height={220}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+
+                  {/* Scanning line animation */}
+                  <motion.div 
+                    className="absolute inset-0 rounded-full overflow-hidden"
+                    animate={{ y: ["0%", "100%", "0%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div 
+                      className="w-full h-[2px] bg-[#00C2FF]"
+                      style={{ opacity: 0.15 }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
 
           {/* Section tag and heading */}

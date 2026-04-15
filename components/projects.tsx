@@ -9,7 +9,7 @@ import Image from "next/image"
 // Generate particles for background
 function ParticleBackground() {
   const particles = useMemo(() => {
-    return Array.from({ length: 40 }, (_, i) => ({
+    return Array.from({ length: 15 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
