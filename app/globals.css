@@ -301,6 +301,49 @@
   animation: bg-zoom 20s ease-in-out infinite;
 }
 
+/* Notification bubble animations */
+@keyframes bubble-slide-in {
+  0% {
+    transform: translateX(100%) translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bubble-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes bubble-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+.bubble-slide-in {
+  animation: bubble-slide-in 0.5s ease-out forwards;
+}
+
+.bubble-bounce {
+  animation: bubble-bounce 0.6s ease-in-out forwards;
+}
+
+.bubble-fade-out {
+  animation: bubble-fade-out 0.5s ease-out forwards;
+}
+
+.badge-pulse {
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
 /* Scan lines moving right to left */
 @keyframes scan-line {
   0% { transform: translateX(100vw); }
