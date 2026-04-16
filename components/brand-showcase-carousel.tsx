@@ -242,15 +242,15 @@ export function BrandShowcaseCarousel() {
               exit="exit"
               transition={transition}
               exitTransition={exitTransition}
-              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A1A3E] px-10 py-10 flex flex-col justify-between border border-[rgba(0,194,255,0.3)] shadow-[inset_0_0_32px_rgba(0,194,255,0.08)]"
+              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A1A3E] px-8 py-8 flex flex-col gap-4 border border-[rgba(0,194,255,0.3)] shadow-[inset_0_0_32px_rgba(0,194,255,0.08)]"
             >
-              {/* Title */}
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] bg-clip-text text-transparent tracking-widest">
+              {/* Title - reduced to 20px */}
+              <h2 className="text-xl font-bold bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] bg-clip-text text-transparent tracking-widest">
                 THE JOURNEY
               </h2>
 
-              {/* Timeline items */}
-              <div className="space-y-3 flex-1 flex flex-col justify-center">
+              {/* Timeline items - compressed to fit all 6 */}
+              <div className="space-y-3 flex flex-col">
                 {[
                   { year: '2020', text: 'Avaamo · First AI role', isLast: false },
                   { year: '2021', text: 'Ola · Scale across 250+ cities', isLast: false },
@@ -261,18 +261,18 @@ export function BrandShowcaseCarousel() {
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    className={`flex gap-3 items-start p-2 rounded-lg transition-colors ${
+                    className={`flex gap-2.5 items-start p-1.5 rounded-lg transition-colors ${
                       item.isLast ? 'bg-[rgba(255,215,0,0.08)]' : ''
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.15 }}
+                    transition={{ delay: i * 0.12 }}
                   >
                     {/* Timeline dot */}
-                    <div className="flex flex-col items-center mt-0.5">
+                    <div className="flex flex-col items-center mt-0.5 flex-shrink-0">
                       {item.isLast ? (
                         <motion.span 
-                          className="text-xl gold-glow"
+                          className="text-lg gold-glow"
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
@@ -281,15 +281,15 @@ export function BrandShowcaseCarousel() {
                       ) : (
                         <div className="w-2 h-2 rounded-full bg-[#00C2FF]" />
                       )}
-                      {i < 5 && <div className="w-0.5 h-5 bg-gradient-to-b from-[#00C2FF] to-[#7B61FF] mt-1" />}
+                      {i < 5 && <div className="w-0.5 h-4 bg-gradient-to-b from-[#00C2FF] to-[#7B61FF] mt-0.5" />}
                     </div>
 
                     {/* Content */}
-                    <div>
-                      <span className={`text-xs font-bold ${item.isLast ? 'text-[#FFD700] text-sm gold-glow' : 'text-[#00C2FF]'}`}>
+                    <div className="min-w-0">
+                      <span className={`text-sm font-bold block ${item.isLast ? 'text-[#FFD700] gold-glow' : 'text-[#00C2FF]'}`}>
                         {item.year}
                       </span>
-                      <p className={`text-xs ${item.isLast ? 'text-[#FFD700] font-semibold' : 'text-[#8BA3BC]'}`}>
+                      <p className={`text-xs leading-snug ${item.isLast ? 'text-[#FFD700] font-semibold' : 'text-[#8BA3BC]'}`}>
                         {item.text}
                       </p>
                     </div>
