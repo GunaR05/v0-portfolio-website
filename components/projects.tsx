@@ -14,7 +14,7 @@ function ParticleBackground() {
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 4 + 2,
-      color: Math.random() > 0.5 ? "#00C2FF" : "#7B61FF",
+      color: Math.random() > 0.5 ? "#0ECCED" : "#025EC4",
       duration: Math.random() * 4 + 3,
       delay: Math.random() * 2,
     }))
@@ -230,7 +230,7 @@ export function Projects() {
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4">
-                    <project.icon className="h-6 w-6" style={{ color: "#00C2FF" }} />
+                    <project.icon className="h-6 w-6" style={{ color: "#0ECCED" }} />
                   </div>
 
                   {/* Category badge with pulse */}
@@ -248,9 +248,9 @@ export function Projects() {
                         key={tag}
                         className="px-2 py-1 text-xs rounded-md border cursor-pointer transition-all duration-200"
                         style={{
-                          background: hoveredTagId === `${project.id}-${tagIndex}` ? "#00C2FF" : "rgba(0,0,0,0.5)",
-                          color: hoveredTagId === `${project.id}-${tagIndex}` ? "#FFFFFF" : "#00C2FF",
-                          borderColor: "#00C2FF",
+                          background: hoveredTagId === `${project.id}-${tagIndex}` ? "#0ECCED" : "rgba(0,0,0,0.5)",
+                          color: hoveredTagId === `${project.id}-${tagIndex}` ? "#FFFFFF" : "#0ECCED",
+                          borderColor: "#0ECCED",
                         }}
                         whileHover={{ scale: 1.05 }}
                         onMouseEnter={() => setHoveredTagId(`${project.id}-${tagIndex}`)}
@@ -293,8 +293,8 @@ export function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center text-sm gap-1 transition-all"
-                      style={{ color: "#00C2FF", fontWeight: 700 }}
-                      whileHover={{ color: "#00C2FF" }}
+                      style={{ color: "#0ECCED", fontWeight: 700 }}
+                      whileHover={{ color: "#0ECCED" }}
                     >
                       Case Study
                       <motion.div

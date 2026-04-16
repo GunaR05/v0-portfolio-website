@@ -97,7 +97,7 @@ export function Footer() {
           className="mt-8 pt-8 border-t border-border text-center"
         >
           <motion.p 
-            className="text-sm font-medium bg-gradient-to-r from-white via-[#00C2FF] via-[#7B61FF] to-white bg-[size:200%_auto] bg-clip-text text-transparent"
+            className="text-sm font-medium bg-gradient-to-r from-white via-[#0ECCED] via-[#025EC4] to-white bg-[size:200%_auto] bg-clip-text text-transparent"
             animate={{ backgroundPosition: ["0% center", "200% center"] }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           >

@@ -152,7 +152,7 @@ export function AIChatbot() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <motion.div
-              className={`bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] text-white text-xs font-bold px-3 py-2.5 rounded-[12px] rounded-br-none shadow-lg whitespace-nowrap relative ${
+              className={`bg-gradient-to-r from-[#0ECCED] to-[#025EC4] text-white text-xs font-bold px-3 py-2.5 rounded-[12px] rounded-br-none shadow-lg whitespace-nowrap relative ${
                 bubblePhase === "enter" ? "bubble-slide-in" : ""
               } ${bubblePhase === "bounce" ? "bubble-bounce" : ""} ${
                 bubblePhase === "exit" ? "bubble-fade-out" : ""
@@ -178,7 +178,7 @@ export function AIChatbot() {
         {showButton && !isOpen && (
           <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-1.5">
             {/* Label - hidden on mobile */}
-            <span className="hidden sm:block text-[10px] text-[#8BA3BC] font-medium">
+            <span className="hidden sm:block text-[10px] text-[#93C5E8] font-medium">
               Chat with Guna AI
             </span>
 
@@ -195,11 +195,11 @@ export function AIChatbot() {
                 }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                className="w-[60px] h-[60px] rounded-full bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow group"
+                className="w-[60px] h-[60px] rounded-full bg-gradient-to-br from-[#0ECCED] to-[#025EC4] flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow group"
                 aria-label="Open chat"
               >
                 {/* Pulse animation ring */}
-                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] animate-ping opacity-30" />
+                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0ECCED] to-[#025EC4] animate-ping opacity-30" />
                 <MessageCircle className="h-7 w-7 text-white relative z-10 group-hover:scale-110 transition-transform" />
 
                 {/* Notification Badge */}
@@ -228,7 +228,7 @@ export function AIChatbot() {
             className="fixed bottom-6 right-6 z-50 w-[380px] h-[520px] bg-card border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] px-4 py-3 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#0ECCED] to-[#025EC4] px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                   <Sparkles className="h-5 w-5 text-white" />
@@ -262,7 +262,7 @@ export function AIChatbot() {
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                       message.isUser
-                        ? "bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] text-white rounded-br-md"
+                        ? "bg-gradient-to-br from-[#0ECCED] to-[#025EC4] text-white rounded-br-md"
                         : "bg-muted text-foreground rounded-bl-md"
                     }`}
                   >
@@ -331,7 +331,7 @@ export function AIChatbot() {
               </Button>
               <Button
                 size="sm"
-                className="flex-1 text-xs bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] hover:opacity-90"
+                className="flex-1 text-xs bg-gradient-to-r from-[#0ECCED] to-[#025EC4] hover:opacity-90"
                 asChild
               >
                 <a href="#contact">

@@ -171,7 +171,7 @@ export function Experience() {
                         transition={{ duration: 0.5, delay: 0.3 }}
                         className="mt-6 p-4 rounded-lg border-2 border-transparent bg-gradient-to-r from-primary/10 to-secondary/10"
                         style={{
-                          background: 'linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(135deg, #00C2FF, #7B61FF) border-box',
+                          background: 'linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(135deg, #0ECCED, #025EC4) border-box',
                           border: '2px solid transparent'
                         }}
                       >

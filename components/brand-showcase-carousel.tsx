@@ -27,7 +27,7 @@ export function BrandShowcaseCarousel() {
   return (
     <div className="relative w-full h-96 flex items-center justify-center">
       {/* Card Container */}
-      <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[rgba(0,194,255,0.3)] shadow-[inset_0_0_32px_rgba(0,194,255,0.08)]">
+      <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[rgba(14,204,237,0.3)] shadow-[inset_0_0_32px_rgba(14,204,237,0.08)]">
         <AnimatePresence mode="wait">
           {/* CARD 0: Quote Card */}
           {currentSlide === 0 && (
@@ -39,19 +39,19 @@ export function BrandShowcaseCarousel() {
               exit="exit"
               transition={transition}
               exitTransition={exitTransition}
-              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A3C5E] px-8 py-8 flex flex-col justify-between border border-[rgba(0,194,255,0.3)] overflow-hidden"
+              className="absolute inset-0 bg-gradient-to-br from-[#030812] to-[#020764] px-8 py-8 flex flex-col justify-between border border-[rgba(14,204,237,0.3)] overflow-hidden"
               style={{
-                backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(0,194,255,0.08), transparent 60%), linear-gradient(to bottom right, #0D1B2A, #1A3C5E)'
+                backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(14,204,237,0.08), transparent 60%), linear-gradient(to bottom right, #030812, #020764)'
               }}
             >
               {/* Quote Mark */}
-              <div className="text-[72px] font-bold bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] bg-clip-text text-transparent leading-none">
+              <div className="text-[72px] font-bold bg-gradient-to-r from-[#0ECCED] to-[#025EC4] bg-clip-text text-transparent leading-none">
                 "
               </div>
 
               {/* Main Quote Text with proper wrapping */}
               <div className="flex flex-col gap-4">
-                <div className="text-base md:text-[22px] font-bold leading-tight bg-gradient-to-r from-white to-[#00C2FF] bg-clip-text text-transparent pr-10 overflow-hidden break-words">
+                <div className="text-base md:text-[22px] font-bold leading-tight bg-gradient-to-r from-white to-[#0ECCED] bg-clip-text text-transparent pr-10 overflow-hidden break-words">
                   {["I", "turn", "AI", "demos", "into", "production", "systems", "that", "scale."].map((word, i) => (
                     <motion.span
                       key={i}
@@ -67,7 +67,7 @@ export function BrandShowcaseCarousel() {
 
                 {/* Gradient Underline */}
                 <motion.div
-                  className="h-1.5 rounded-full bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] w-max"
+                  className="h-1.5 rounded-full bg-gradient-to-r from-[#0ECCED] to-[#025EC4] w-max"
                   initial={{ width: 0 }}
                   animate={{ width: 'auto' }}
                   transition={{ delay: 0.9, duration: 0.6 }}
@@ -75,13 +75,13 @@ export function BrandShowcaseCarousel() {
               </div>
 
               {/* Bottom Row - Profile */}
-              <div className="flex items-center gap-3 pt-4 border-t border-[rgba(0,194,255,0.2)]">
-                <div className="w-12 h-12 rounded-[10px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] flex-shrink-0 flex items-center justify-center">
+              <div className="flex items-center gap-3 pt-4 border-t border-[rgba(14,204,237,0.2)]">
+                <div className="w-12 h-12 rounded-[10px] bg-gradient-to-br from-[#0ECCED] to-[#025EC4] flex-shrink-0 flex items-center justify-center">
                   <span className="text-lg font-bold text-white font-poppins">G</span>
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Gunashree Rajakumar</p>
-                  <p className="text-[10px] text-[#8BA3BC] font-mono">rajakumar.g@northeastern.edu</p>
+                  <p className="text-[10px] text-[#93C5E8] font-mono">rajakumar.g@northeastern.edu</p>
                 </div>
               </div>
             </motion.div>
@@ -97,11 +97,11 @@ export function BrandShowcaseCarousel() {
               exit="exit"
               transition={transition}
               exitTransition={exitTransition}
-              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A2A3A] px-10 py-10 flex flex-col justify-between border border-[rgba(0,194,255,0.3)] shadow-[inset_0_0_32px_rgba(0,194,255,0.08)]"
+              className="absolute inset-0 bg-gradient-to-br from-[#030812] to-[#020764] px-10 py-10 flex flex-col justify-between border border-[rgba(14,204,237,0.3)] shadow-[inset_0_0_32px_rgba(14,204,237,0.08)]"
             >
               {/* Title */}
               <div>
-                <h2 className="text-lg font-bold tracking-widest bg-gradient-to-r from-[#00C2FF] to-[#00E5C3] bg-clip-text text-transparent">
+                <h2 className="text-lg font-bold tracking-widest bg-gradient-to-r from-[#0ECCED] to-[#0ECCED] bg-clip-text text-transparent">
                   IMPACT AT SCALE
                 </h2>
               </div>
@@ -109,9 +109,9 @@ export function BrandShowcaseCarousel() {
               {/* Metrics */}
               <div className="space-y-4 flex-1 flex flex-col justify-center">
                 {[
-                  { label: 'Users Served', value: '100M+', percent: 95, color: 'from-[#00C2FF]' },
-                  { label: 'Requests/Min', value: '10K+', percent: 90, color: 'from-[#7B61FF]' },
-                  { label: 'Fraud Latency', value: '<50ms', percent: 85, color: 'from-[#00E5C3]' },
+                  { label: 'Users Served', value: '100M+', percent: 95, color: 'from-[#0ECCED]' },
+                  { label: 'Requests/Min', value: '10K+', percent: 90, color: 'from-[#025EC4]' },
+                  { label: 'Fraud Latency', value: '<50ms', percent: 85, color: 'from-[#0ECCED]' },
                   { label: 'Aiera × Anthropic', value: 'LIVE', percent: 100, color: 'from-[#00FF00]', isBadge: true }
                 ].map((metric, i) => (
                   <motion.div
@@ -121,18 +121,18 @@ export function BrandShowcaseCarousel() {
                     transition={{ delay: i * 0.15 }}
                   >
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs text-[#8BA3BC] font-medium">{metric.label}</span>
+                      <span className="text-xs text-[#93C5E8] font-medium">{metric.label}</span>
                       {metric.isBadge ? (
                         <span className={`text-sm font-bold text-[#00FF00] ${metric.isBadge ? 'pulse-blink' : ''}`}>
                           {metric.value}
                         </span>
                       ) : (
-                        <span className="text-sm font-bold text-[#00C2FF]">{metric.value}</span>
+                        <span className="text-sm font-bold text-[#0ECCED]">{metric.value}</span>
                       )}
                     </div>
-                    <div className="h-1.5 bg-[#1E3A55] rounded-full overflow-hidden shadow-[inset_0_0_8px_rgba(0,194,255,0.2)]">
+                    <div className="h-1.5 bg-[#020764] rounded-full overflow-hidden shadow-[inset_0_0_8px_rgba(14,204,237,0.2)]">
                       <motion.div
-                        className={`h-full bg-gradient-to-r ${metric.color} to-transparent shadow-[0_0_8px_${metric.color === 'from-[#00FF00]' ? 'rgba(0,255,0,0.6)' : 'rgba(0,194,255,0.6)'}]`}
+                        className={`h-full bg-gradient-to-r ${metric.color} to-transparent shadow-[0_0_8px_${metric.color === 'from-[#00FF00]' ? 'rgba(0,255,0,0.6)' : 'rgba(14,204,237,0.6)'}]`}
                         initial={{ width: 0 }}
                         animate={{ width: `${metric.percent}%` }}
                         transition={{ delay: i * 0.15 + 0.3, duration: 1.5 }}
@@ -159,14 +159,14 @@ export function BrandShowcaseCarousel() {
               exit="exit"
               transition={transition}
               exitTransition={exitTransition}
-              className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,194,255,0.05),#0D1B2A)] px-10 py-10 flex flex-col items-center justify-center gap-6 border-2 border-[#00C2FF] shadow-[inset_0_0_32px_rgba(0,194,255,0.08),0_0_24px_rgba(0,194,255,0.3)]"
+              className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,204,237,0.05),#030812)] px-10 py-10 flex flex-col items-center justify-center gap-6 border-2 border-[#0ECCED] shadow-[inset_0_0_32px_rgba(14,204,237,0.08),0_0_24px_rgba(14,204,237,0.3)]"
             >
               {/* Logo */}
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-                className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] flex-shrink-0 flex items-center justify-center"
+                className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#0ECCED] to-[#025EC4] flex-shrink-0 flex items-center justify-center"
               >
                 <span className="text-2xl font-bold text-white">G</span>
               </motion.div>
@@ -183,7 +183,7 @@ export function BrandShowcaseCarousel() {
 
               {/* Divider Line with glow */}
               <motion.div
-                className="h-px w-24 bg-gradient-to-r from-transparent via-[#00C2FF] to-transparent shadow-[0_0_8px_rgba(0,194,255,0.8)]"
+                className="h-px w-24 bg-gradient-to-r from-transparent via-[#0ECCED] to-transparent shadow-[0_0_8px_rgba(14,204,237,0.8)]"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.3 }}
@@ -196,8 +196,8 @@ export function BrandShowcaseCarousel() {
                 transition={{ delay: 0.4 }}
                 className="text-center space-y-1"
               >
-                <p className="text-sm text-[#00C2FF] font-semibold">Senior Software Engineer</p>
-                <p className="text-xs text-[#8BA3BC]">Applied AI Systems Engineer</p>
+                <p className="text-sm text-[#0ECCED] font-semibold">Senior Software Engineer</p>
+                <p className="text-xs text-[#93C5E8]">Applied AI Systems Engineer</p>
               </motion.div>
 
               {/* Company Pills */}
@@ -210,7 +210,7 @@ export function BrandShowcaseCarousel() {
                 {['Aiera', 'Flipkart', 'Airtel', 'Ola', 'Avaamo'].map((company, i) => (
                   <motion.span
                     key={i}
-                    className="px-3 py-1.5 border border-[#00C2FF] text-[#00C2FF] text-xs rounded-full font-medium"
+                    className="px-3 py-1.5 border border-[#0ECCED] text-[#0ECCED] text-xs rounded-full font-medium"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 + i * 0.1 }}
@@ -225,7 +225,7 @@ export function BrandShowcaseCarousel() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.85 }}
-                className="text-[11px] text-[#8BA3BC] font-mono pt-4 border-t border-[rgba(0,194,255,0.2)]"
+                className="text-[11px] text-[#93C5E8] font-mono pt-4 border-t border-[rgba(14,204,237,0.2)]"
               >
                 rajakumar.g@northeastern.edu
               </motion.p>
@@ -242,10 +242,10 @@ export function BrandShowcaseCarousel() {
               exit="exit"
               transition={transition}
               exitTransition={exitTransition}
-              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A1A3E] px-8 py-8 flex flex-col gap-4 border border-[rgba(0,194,255,0.3)] shadow-[inset_0_0_32px_rgba(0,194,255,0.08)]"
+              className="absolute inset-0 bg-gradient-to-br from-[#030812] to-[#020764] px-8 py-8 flex flex-col gap-4 border border-[rgba(14,204,237,0.3)] shadow-[inset_0_0_32px_rgba(14,204,237,0.08)]"
             >
               {/* Title - reduced to 20px */}
-              <h2 className="text-xl font-bold bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] bg-clip-text text-transparent tracking-widest">
+              <h2 className="text-xl font-bold bg-gradient-to-r from-[#0ECCED] to-[#025EC4] bg-clip-text text-transparent tracking-widest">
                 THE JOURNEY
               </h2>
 
@@ -279,17 +279,17 @@ export function BrandShowcaseCarousel() {
                           ⭐
                         </motion.span>
                       ) : (
-                        <div className="w-2 h-2 rounded-full bg-[#00C2FF]" />
+                        <div className="w-2 h-2 rounded-full bg-[#0ECCED]" />
                       )}
-                      {i < 5 && <div className="w-0.5 h-4 bg-gradient-to-b from-[#00C2FF] to-[#7B61FF] mt-0.5" />}
+                      {i < 5 && <div className="w-0.5 h-4 bg-gradient-to-b from-[#0ECCED] to-[#025EC4] mt-0.5" />}
                     </div>
 
                     {/* Content */}
                     <div className="min-w-0">
-                      <span className={`text-sm font-bold block ${item.isLast ? 'text-[#FFD700] gold-glow' : 'text-[#00C2FF]'}`}>
+                      <span className={`text-sm font-bold block ${item.isLast ? 'text-[#FFD700] gold-glow' : 'text-[#0ECCED]'}`}>
                         {item.year}
                       </span>
-                      <p className={`text-xs leading-snug ${item.isLast ? 'text-[#FFD700] font-semibold' : 'text-[#8BA3BC]'}`}>
+                      <p className={`text-xs leading-snug ${item.isLast ? 'text-[#FFD700] font-semibold' : 'text-[#93C5E8]'}`}>
                         {item.text}
                       </p>
                     </div>
@@ -309,8 +309,8 @@ export function BrandShowcaseCarousel() {
             onClick={() => setCurrentSlide(i)}
             className={`rounded-full transition-all ${
               currentSlide === i
-                ? 'w-8 h-3 bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] shadow-lg shadow-[#00C2FF]/50'
-                : 'w-3 h-3 bg-[#1E3A55] hover:bg-[#00C2FF]/50'
+                ? 'w-8 h-3 bg-gradient-to-r from-[#0ECCED] to-[#025EC4] shadow-lg shadow-[#0ECCED]/50'
+                : 'w-3 h-3 bg-[#020764] hover:bg-[#0ECCED]/50'
             }`}
             whileHover={{ scale: 1.3 }}
           />
@@ -318,7 +318,7 @@ export function BrandShowcaseCarousel() {
       </div>
 
       {/* Slide Counter */}
-      <div className="absolute top-4 right-4 text-xs font-mono text-[#8BA3BC]">
+      <div className="absolute top-4 right-4 text-xs font-mono text-[#93C5E8]">
         {String(currentSlide + 1).padStart(2, '0')} / 04
       </div>
     </div>
