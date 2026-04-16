@@ -44,14 +44,33 @@ const contactLinks = [
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsLoading(false)
-    setIsSubmitted(true)
+    setError(null)
+
+    const form = e.currentTarget
+    const data = new FormData(form)
+
+    try {
+      const res = await fetch("https://formspree.io/f/xaqaqkop", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" }
+      })
+
+      if (res.ok) {
+        setIsSubmitted(true)
+      } else {
+        setError("Something went wrong. Please try again.")
+      }
+    } catch {
+      setError("Network error. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -156,9 +175,9 @@ export function Contact() {
                   <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="h-8 w-8 text-green-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">Message Sent!</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-2">Message sent!</h3>
                   <p className="text-muted-foreground">
-                    Thank you for reaching out. I&apos;ll get back to you soon.
+                    I&apos;ll get back to you soon.
                   </p>
                 </motion.div>
               ) : (
@@ -168,6 +187,7 @@ export function Contact() {
                       <Label htmlFor="name">Name</Label>
                       <Input
                         id="name"
+                        name="name"
                         placeholder="Your name"
                         required
                         className="bg-background border-border"
@@ -177,6 +197,7 @@ export function Contact() {
                       <Label htmlFor="email">Email</Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="your@email.com"
                         required
@@ -189,6 +210,7 @@ export function Contact() {
                     <Label htmlFor="subject">Subject</Label>
                     <Input
                       id="subject"
+                      name="subject"
                       placeholder="What's this about?"
                       required
                       className="bg-background border-border"
@@ -199,12 +221,17 @@ export function Contact() {
                     <Label htmlFor="message">Message</Label>
                     <Textarea
                       id="message"
+                      name="message"
                       placeholder="Your message..."
                       rows={5}
                       required
                       className="bg-background border-border resize-none"
                     />
                   </div>
+
+                  {error && (
+                    <p className="text-sm text-red-500">{error}</p>
+                  )}
 
                   <Button
                     type="submit"
