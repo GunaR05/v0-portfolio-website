@@ -291,6 +291,16 @@
   animation: float-badge ease-in-out infinite;
 }
 
+/* Background zoom animation */
+@keyframes bg-zoom {
+  0%, 100% { transform: scale(1) translateX(0); }
+  50% { transform: scale(1.08) translateX(-2%); }
+}
+
+.bg-zoom {
+  animation: bg-zoom 20s ease-in-out infinite;
+}
+
 /* Scan lines moving right to left */
 @keyframes scan-line {
   0% { transform: translateX(100vw); }
