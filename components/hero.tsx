@@ -253,8 +253,8 @@ export function Hero() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* FULL HERO BACKGROUND - Animated RAG Pipeline Visualization */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
+      {/* FULL HERO BACKGROUND - Animated RAG Pipeline Visualization (RIGHT SIDE ONLY) */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" style={{ zIndex: 0 }}>
         <defs>
           <filter id="rag-glow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -272,29 +272,31 @@ export function Hero() {
           </filter>
         </defs>
         
-        {/* LEFT SIDE - Data Sources (4 glowing boxes) */}
+        {/* LEFT SIDE - Data Sources (4 glowing boxes) - MOVED TO RIGHT */}
         {["Data", "Docs", "APIs", "Events"].map((label, i) => {
           const y = 150 + i * 150
+          const x = 800  // Moved to right side
           return (
             <g key={`source-${i}`}>
-              {/* Glowing box with pulse */}
+              {/* Glowing box with pulse - 40% smaller */}
               <motion.rect
-                x="50"
+                x={x}
                 y={y}
-                width="120"
-                height="60"
-                rx="8"
-                fill="rgba(0,194,255,0.12)"
+                width="72"
+                height="36"
+                rx="4"
+                fill="rgba(0,194,255,0.08)"
                 stroke="#00C2FF"
-                strokeWidth="1.5"
+                strokeWidth="1"
+                opacity="0.08"
                 filter="url(#node-glow)"
                 style={{
                   animation: `glow-pulse 3s ease-in-out infinite`,
                   animationDelay: `${i * 0.3}s`
                 } as any}
               />
-              {/* Label */}
-              <text x="110" y={y + 38} textAnchor="middle" fill="#00C2FF" fontSize="14" fontWeight="600" fontFamily="monospace">
+              {/* Label - smaller font */}
+              <text x={x + 36} y={y + 23} textAnchor="middle" fill="#00C2FF" fontSize="8" fontWeight="600" fontFamily="monospace" opacity="0.1">
                 {label}
               </text>
               
@@ -302,15 +304,16 @@ export function Hero() {
               {[0, 1, 2].map((dotIdx) => (
                 <g key={`dot-${i}-${dotIdx}`}>
                   {/* Dashed line to center */}
-                  <line x1="170" y1={y + 30} x2="500" y2="350" stroke="rgba(0,194,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.5" />
+                  <line x1={x} y1={y + 18} x2="900" y2="350" stroke="rgba(0,194,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
                   {/* Traveling dot */}
                   <motion.circle
-                    cx="170"
-                    cy={y + 30}
-                    r="4"
+                    cx={x}
+                    cy={y + 18}
+                    r="2.4"
                     fill="#00C2FF"
+                    opacity="0.08"
                     filter="url(#rag-glow)"
-                    animate={{ cx: ["170", "500"], cy: [y + 30, "350"] }}
+                    animate={{ cx: [x, "900"], cy: [y + 18, "350"] }}
                     transition={{
                       duration: 2,
                       repeat: Infinity,
@@ -324,12 +327,11 @@ export function Hero() {
           )
         })}
 
-        {/* CENTER - Processing Nodes (Hexagons) */}
-        {/* Helper function to draw hexagon */}
+        {/* CENTER - Processing Nodes (Hexagons) - MOVED RIGHT, 40% SMALLER */}
         {[
-          { cx: 500, cy: 200, label: "Embed", size: 40 },
-          { cx: 500, cy: 350, label: "Vector DB", size: 50 },
-          { cx: 500, cy: 520, label: "BM25", size: 40 }
+          { cx: 900, cy: 200, label: "Embed", size: 24 },
+          { cx: 900, cy: 350, label: "Vector DB", size: 30 },
+          { cx: 900, cy: 500, label: "BM25", size: 24 }
         ].map((node, i) => {
           const points = Array.from({ length: 6 }, (_, j) => {
             const angle = (j * 60 * Math.PI) / 180
@@ -340,19 +342,20 @@ export function Hero() {
           
           return (
             <g key={`node-${i}`}>
-              {/* Hexagon */}
+              {/* Hexagon - reduced opacity */}
               <motion.polygon
                 points={points}
-                fill={i === 1 ? "rgba(0,194,255,0.15)" : "rgba(0,194,255,0.12)"}
+                fill={i === 1 ? "rgba(0,194,255,0.08)" : "rgba(0,194,255,0.08)"}
                 stroke="#00C2FF"
-                strokeWidth="2"
+                strokeWidth="1"
+                opacity="0.08"
                 filter="url(#node-glow)"
                 style={{
                   animation: `glow-pulse ${i === 1 ? 2.5 : 3.5}s ease-in-out infinite`
                 } as any}
               />
-              {/* Label */}
-              <text x={node.cx} y={node.cy + 5} textAnchor="middle" fill="#00C2FF" fontSize="12" fontWeight="700" fontFamily="monospace">
+              {/* Label - smaller font, reduced opacity */}
+              <text x={node.cx} y={node.cy + 3} textAnchor="middle" fill="#00C2FF" fontSize="7" fontWeight="700" fontFamily="monospace" opacity="0.1">
                 {node.label}
               </text>
 
@@ -362,15 +365,16 @@ export function Hero() {
                   {[0, 1, 2, 3].map((dotIdx) => (
                     <g key={`dot-connection-${dotIdx}`}>
                       {/* Dashed line */}
-                      <line x1={node.cx} y1={node.cy + node.size + 5} x2="500" y2={[350, 520][i]} stroke="rgba(0,194,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.5" />
+                      <line x1={node.cx} y1={node.cy + node.size + 3} x2="900" y2={[350, 500][i]} stroke="rgba(0,194,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
                       {/* Traveling dot */}
                       <motion.circle
                         cx={node.cx}
-                        cy={node.cy + node.size + 5}
-                        r="4"
+                        cy={node.cy + node.size + 3}
+                        r="2.4"
                         fill="#00C2FF"
+                        opacity="0.08"
                         filter="url(#rag-glow)"
-                        animate={{ cy: [node.cy + node.size + 5, [350, 520][i]] }}
+                        animate={{ cy: [node.cy + node.size + 3, [350, 500][i]] }}
                         transition={{
                           duration: 2,
                           repeat: Infinity,
@@ -387,39 +391,41 @@ export function Hero() {
         })}
 
         {/* RIGHT SIDE - LLM Node + Output */}
-        {/* Large LLM Brain node */}
+        {/* Large LLM Brain node - 40% smaller */}
         <motion.circle
-          cx="900"
+          cx="1050"
           cy="350"
-          r="70"
-          fill="rgba(123,97,255,0.15)"
+          r="42"
+          fill="rgba(123,97,255,0.08)"
           stroke="#7B61FF"
-          strokeWidth="2.5"
+          strokeWidth="1"
+          opacity="0.08"
           filter="url(#node-glow)"
           style={{
             animation: `glow-pulse 2s ease-in-out infinite`
           } as any}
         />
-        {/* LLM Label */}
-        <text x="900" y="360" textAnchor="middle" fill="#7B61FF" fontSize="16" fontWeight="700" fontFamily="monospace">
+        {/* LLM Label - smaller, reduced opacity */}
+        <text x="1050" y="354" textAnchor="middle" fill="#7B61FF" fontSize="8" fontWeight="700" fontFamily="monospace" opacity="0.1">
           LLM
         </text>
 
         {/* Lines from center nodes to LLM */}
-        {[200, 350, 520].map((cy, i) => (
+        {[200, 350, 500].map((cy, i) => (
           <g key={`to-llm-${i}`}>
             {[0, 1, 2].map((dotIdx) => (
               <g key={`dot-llm-${dotIdx}`}>
                 {/* Dashed line */}
-                <line x1="550" y1={cy} x2="830" y2="350" stroke="rgba(123,97,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.5" />
+                <line x1="930" y1={cy} x2="1008" y2="350" stroke="rgba(123,97,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
                 {/* Traveling dot */}
                 <motion.circle
-                  cx="550"
+                  cx="930"
                   cy={cy}
-                  r="4"
+                  r="2.4"
                   fill="#7B61FF"
+                  opacity="0.08"
                   filter="url(#rag-glow)"
-                  animate={{ cx: ["550", "830"], cy: [cy, "350"] }}
+                  animate={{ cx: ["930", "1008"], cy: [cy, "350"] }}
                   transition={{
                     duration: 2,
                     repeat: Infinity,
@@ -432,23 +438,24 @@ export function Hero() {
           </g>
         ))}
 
-        {/* Output Response box */}
+        {/* Output Response box - 40% smaller */}
         <motion.rect
-          x="1050"
-          y="310"
-          width="140"
-          height="80"
-          rx="8"
-          fill="rgba(123,97,255,0.12)"
+          x="1150"
+          y="325"
+          width="84"
+          height="50"
+          rx="4"
+          fill="rgba(123,97,255,0.08)"
           stroke="#7B61FF"
-          strokeWidth="1.5"
+          strokeWidth="1"
+          opacity="0.08"
           filter="url(#node-glow)"
           style={{
             animation: `glow-pulse 2.5s ease-in-out infinite`
           } as any}
         />
-        {/* Output Label */}
-        <text x="1120" y="360" textAnchor="middle" fill="#7B61FF" fontSize="13" fontWeight="600" fontFamily="monospace">
+        {/* Output Label - smaller, reduced opacity */}
+        <text x="1192" y="355" textAnchor="middle" fill="#7B61FF" fontSize="7" fontWeight="600" fontFamily="monospace" opacity="0.1">
           Response
         </text>
 
@@ -456,15 +463,16 @@ export function Hero() {
         {[0, 1, 2, 3].map((dotIdx) => (
           <g key={`output-dot-${dotIdx}`}>
             {/* Dashed line */}
-            <line x1="970" y1="350" x2="1050" y2="350" stroke="rgba(123,97,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.5" />
+            <line x1="1092" y1="350" x2="1150" y2="350" stroke="rgba(123,97,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
             {/* Traveling dot */}
             <motion.circle
-              cx="970"
+              cx="1092"
               cy="350"
-              r="4"
+              r="2.4"
               fill="#7B61FF"
+              opacity="0.08"
               filter="url(#rag-glow)"
-              animate={{ cx: ["970", "1050"] }}
+              animate={{ cx: ["1092", "1150"] }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
@@ -478,10 +486,10 @@ export function Hero() {
 
       {/* Breathing scale animation for entire visualization */}
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 0 }}
         animate={{ scale: [1, 1.02, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformOrigin: "center" }}
       />
       
       
