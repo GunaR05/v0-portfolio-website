@@ -41,17 +41,17 @@
 
 .dark {
   --background: #030812;
-  --foreground: #E8F0FE;
+  --foreground: #A8C4D4;
   --card: #043780;
-  --card-foreground: #E8F0FE;
+  --card-foreground: #FFFFFF;
   --popover: #020764;
-  --popover-foreground: #E8F0FE;
+  --popover-foreground: #FFFFFF;
   --primary: #025EC4;
   --primary-foreground: #ffffff;
   --secondary: #020764;
   --secondary-foreground: #ffffff;
   --muted: #020764;
-  --muted-foreground: #8BA3BC;
+  --muted-foreground: #A8C4D4;
   --accent: #0ECCED;
   --accent-foreground: #030812;
   --destructive: oklch(0.396 0.141 25.723);
