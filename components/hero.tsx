@@ -235,7 +235,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section className="relative min-h-[100dvh] flex items-center justify-center pt-20 overflow-hidden">
       {/* Matrix rain background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {matrixColumns.map((col) => (
@@ -494,10 +494,10 @@ export function Hero() {
       
       
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left content */}
-          <div className="space-y-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+          {/* Left content — min 45% on desktop, full width on mobile */}
+          <div className="space-y-8 w-full lg:min-w-[45%] lg:max-w-[55%]">
             {/* Availability badge with sparkles */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -635,28 +635,47 @@ export function Hero() {
                 </Button>
               </motion.div>
             </motion.div>
+
+            {/* Stats row — mobile only (stats also appear in code card on desktop) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex lg:hidden items-center justify-center gap-8 pt-2"
+            >
+              <div className="text-center">
+                <span className="text-primary font-bold text-2xl">{yearsCount}+</span>
+                <p className="text-muted-foreground text-xs mt-0.5">Years Exp.</p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div className="text-center">
+                <span className="text-secondary font-bold text-2xl">{reqCount}K+</span>
+                <p className="text-muted-foreground text-xs mt-0.5">Req/Min</p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div className="text-center">
+                <span className="text-accent font-bold text-2xl">{companiesCount}</span>
+                <p className="text-muted-foreground text-xs mt-0.5">Companies</p>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Right content - Code card with animated background */}
+          {/* Right content - Code card — hidden on mobile, max 50% on desktop */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative hidden lg:block"
+            className="hidden lg:block relative lg:w-[50%] lg:flex-shrink-0"
           >
             {/* Animated data flow lines behind card */}
             <div className="absolute inset-0 -z-5 pointer-events-none">
               {[...Array(6)].map((_, i) => (
                 <div key={`line-${i}`} className="absolute w-full h-px" style={{ top: `${20 + i * 15}%`, backgroundColor: "rgba(0,194,255,0.1)" }}>
-                  {/* Glowing dots flowing along line */}
                   {[...Array(3)].map((_, dotIdx) => (
                     <motion.div
                       key={`dot-${dotIdx}`}
                       className="absolute w-1 h-1 bg-[#00C2FF] rounded-full"
-                      style={{
-                        boxShadow: "0 0 8px #00C2FF",
-                        top: "-1.5px"
-                      }}
+                      style={{ boxShadow: "0 0 8px #00C2FF", top: "-1.5px" }}
                       animate={{ x: ["-100%", "100%"] }}
                       transition={{
                         duration: 2 + (dotIdx * 0.5),
@@ -670,23 +689,22 @@ export function Hero() {
               ))}
             </div>
 
-            {/* Floating tech badges around card */}
+            {/* Floating tech badges — desktop only, anchored to right side of card */}
             <div className="absolute inset-0 -z-5 pointer-events-none">
               {[
-                { text: "PY", top: "-30px", left: "-40px" },
-                { text: "AI", top: "50%", right: "-60px" },
-                { text: "{}", bottom: "80px", left: "-50px" },
-                { text: "RAG", top: "20px", right: "-70px" },
-                { text: "LLM", bottom: "20px", right: "-50px" },
-                { text: "API", top: "40%", left: "-60px" }
+                { text: "PY",  top: "-30px",  right: "-20px" },
+                { text: "AI",  top: "20%",    right: "-50px" },
+                { text: "{}",  bottom: "80px", right: "-40px" },
+                { text: "RAG", top: "50%",    right: "-60px" },
+                { text: "LLM", bottom: "20px", right: "-45px" },
+                { text: "API", top: "40%",    right: "-55px" }
               ].map((badge, idx) => (
                 <motion.div
                   key={idx}
                   className="absolute px-2 py-1 rounded border border-[#00C2FF] bg-background/50 text-xs font-mono text-[#00C2FF] backdrop-blur-sm"
                   style={{
                     top: badge.top,
-                    bottom: badge.bottom,
-                    left: badge.left,
+                    bottom: (badge as any).bottom,
                     right: badge.right,
                     opacity: 0.6
                   }}
