@@ -39,19 +39,19 @@ export function BrandShowcaseCarousel() {
               exit="exit"
               transition={transition}
               exitTransition={exitTransition}
-              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A3C5E] p-8 flex flex-col justify-between border border-[rgba(0,194,255,0.3)] overflow-hidden"
+              className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] to-[#1A3C5E] px-8 py-8 flex flex-col justify-between border border-[rgba(0,194,255,0.3)] overflow-hidden"
               style={{
                 backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(0,194,255,0.08), transparent 60%), linear-gradient(to bottom right, #0D1B2A, #1A3C5E)'
               }}
             >
               {/* Quote Mark */}
-              <div className="text-[72px] font-bold bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] bg-clip-text text-transparent leading-none mb-4">
+              <div className="text-[72px] font-bold bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] bg-clip-text text-transparent leading-none">
                 "
               </div>
 
-              {/* Main Quote Text with gradient */}
-              <div className="flex flex-col gap-6 flex-1 justify-center">
-                <div className="text-[22px] font-bold leading-tight max-w-md bg-gradient-to-r from-white to-[#00C2FF] bg-clip-text text-transparent">
+              {/* Main Quote Text with proper wrapping */}
+              <div className="flex flex-col gap-4">
+                <div className="text-base md:text-[22px] font-bold leading-tight bg-gradient-to-r from-white to-[#00C2FF] bg-clip-text text-transparent pr-10 overflow-hidden break-words">
                   {["I", "turn", "AI", "demos", "into", "production", "systems", "that", "scale."].map((word, i) => (
                     <motion.span
                       key={i}
@@ -67,16 +67,18 @@ export function BrandShowcaseCarousel() {
 
                 {/* Gradient Underline */}
                 <motion.div
-                  className="h-1.5 rounded-full bg-gradient-to-r from-[#00C2FF] to-[#7B61FF]"
+                  className="h-1.5 rounded-full bg-gradient-to-r from-[#00C2FF] to-[#7B61FF] w-max"
                   initial={{ width: 0 }}
-                  animate={{ width: 280 }}
+                  animate={{ width: 'auto' }}
                   transition={{ delay: 0.9, duration: 0.6 }}
                 />
               </div>
 
               {/* Bottom Row - Profile */}
               <div className="flex items-center gap-3 pt-4 border-t border-[rgba(0,194,255,0.2)]">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] flex-shrink-0" />
+                <div className="w-12 h-12 rounded-[10px] bg-gradient-to-br from-[#00C2FF] to-[#7B61FF] flex-shrink-0 flex items-center justify-center">
+                  <span className="text-lg font-bold text-white font-poppins">G</span>
+                </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Gunashree Rajakumar</p>
                   <p className="text-[10px] text-[#8BA3BC] font-mono">rajakumar.g@northeastern.edu</p>
