@@ -6,7 +6,7 @@ import { useRef } from "react"
 
 const timeline = [
   {
-    period: "May 2025 – Present",
+    period: "May 2025 – Dec 2025",
     title: "Software Engineer — ML & AI Systems",
     company: "Aiera",
     location: "Boston, MA",

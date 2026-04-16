@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion"
 import { Download, ArrowDown, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect, useMemo, useRef } from "react"
+import { BrandShowcaseCarousel } from "./brand-showcase-carousel"
 
 // Pre-tokenized code lines to avoid hydration issues with regex
 const codeLines = [
@@ -724,89 +725,10 @@ export function Hero() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
+              className="relative w-full h-96"
             >
-              {/* Grid wave pulse effect behind card */}
-              <div className="absolute inset-0 -z-10 rounded-2xl grid-wave" style={{
-                backgroundImage: 'linear-gradient(rgba(0, 194, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 194, 255, 0.03) 1px, transparent 1px)',
-                backgroundSize: '50px 50px'
-              }} />
-
-              {/* Code card with glow animation */}
-              <div className="bg-card border border-border rounded-2xl p-6 shadow-2xl card-glow">
-                {/* Code header */}
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-4 text-sm text-muted-foreground font-mono">rag_pipeline.py</span>
-                </div>
-                
-                {/* Code content with animated lines */}
-                <pre className="text-sm font-mono overflow-x-auto">
-                  <code>
-                    {codeLines.map((line, lineIndex) => (
-                      <motion.div 
-                        key={line.lineNum} 
-                        className="leading-6"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ 
-                          opacity: lineIndex < visibleLines ? 1 : 0,
-                          x: lineIndex < visibleLines ? 0 : -10
-                        }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <span className="text-muted-foreground mr-4 select-none">
-                          {String(line.lineNum).padStart(2, " ")}
-                        </span>
-                        {line.tokens.length === 0 ? (
-                          <span>&nbsp;</span>
-                        ) : (
-                          line.tokens.map((token, idx) => (
-                            <span key={idx} style={{ color: tokenColors[token.type] }}>
-                              {token.text}
-                            </span>
-                          ))
-                        )}
-                        {/* Green cursor on current line */}
-                        {lineIndex === visibleLines - 1 && visibleLines < codeLines.length && (
-                          <span className="cursor-blink text-green-500 ml-1">|</span>
-                        )}
-                      </motion.div>
-                    ))}
-                  </code>
-                </pre>
-
-                {/* Stats row with count-up animation */}
-                <div className="mt-6 pt-4 border-t border-border">
-                  <div className="flex items-center justify-between text-sm">
-                    <motion.div 
-                      className="text-center"
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <span className="text-primary font-bold text-lg">{yearsCount}+</span>
-                      <p className="text-muted-foreground text-xs">Years Experience</p>
-                    </motion.div>
-                    <motion.div 
-                      className="text-center"
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <span className="text-secondary font-bold text-lg">{reqCount}K+</span>
-                      <p className="text-muted-foreground text-xs">Req/Min</p>
-                    </motion.div>
-                    <motion.div 
-                      className="text-center"
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <span className="text-accent font-bold text-lg">{companiesCount}</span>
-                      <p className="text-muted-foreground text-xs">Companies</p>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
+              {/* Brand Showcase Carousel */}
+              <BrandShowcaseCarousel />
 
               {/* Decorative glow */}
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-2xl -z-10" />
