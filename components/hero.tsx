@@ -30,7 +30,7 @@ const tokenColors: Record<string, string> = {
   keyword: "#025EC4",
   class: "#00E5C3",
   string: "#0ECCED",
-  comment: "#A8C4D4",
+  comment: "#93C5E8",
   method: "#0ECCED",
   plain: "inherit",
 }
