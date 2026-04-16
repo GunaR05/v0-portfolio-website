@@ -112,7 +112,8 @@ export function Experience() {
           </motion.h2>
         </motion.div>
 
-        <div className="lg:col-span-2">
+        <div className="relative">
+          <div className="lg:col-span-2">
             {/* Animated gradient vertical line */}
             <motion.div 
               className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block origin-top"
