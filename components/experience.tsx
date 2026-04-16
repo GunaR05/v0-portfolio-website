@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { Puzzle, Link2, Rocket, Target, Calendar, MapPin, Handshake } from "lucide-react"
+import { Calendar, MapPin, Handshake } from "lucide-react"
 import { useRef } from "react"
 
 const timeline = [
@@ -77,29 +77,6 @@ const timeline = [
   }
 ]
 
-const specializations = [
-  {
-    icon: Puzzle,
-    title: "End-to-End AI System Design",
-    description: "Complete pipelines from data ingestion to production deployment."
-  },
-  {
-    icon: Link2,
-    title: "LLM + Semantic Search Integration",
-    description: "Combining language models with vector databases for intelligent retrieval."
-  },
-  {
-    icon: Rocket,
-    title: "Production-Focused Engineering",
-    description: "Scalable, reliable systems performing under real-world conditions."
-  },
-  {
-    icon: Target,
-    title: "Product-Oriented AI Development",
-    description: "Aligning AI capabilities with user needs and business outcomes."
-  }
-]
-
 export function Experience() {
   const timelineRef = useRef(null)
   const isTimelineInView = useInView(timelineRef, { once: true, margin: "-100px" })
@@ -135,9 +112,7 @@ export function Experience() {
           </motion.h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8">
-          {/* Left - Timeline (2 columns) */}
-          <div ref={timelineRef} className="lg:col-span-2 relative">
+        <div className="lg:col-span-2">
             {/* Animated gradient vertical line */}
             <motion.div 
               className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block origin-top"
@@ -221,33 +196,6 @@ export function Experience() {
                 </motion.div>
               ))}
             </div>
-          </div>
-
-          {/* Right - Specializations */}
-          <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-            <h3 className="text-lg font-bold text-foreground mb-4 font-[family-name:var(--font-poppins)]">
-              Specializations
-            </h3>
-            {specializations.map((spec, index) => (
-              <motion.div
-                key={spec.title}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="bg-card border border-border rounded-xl p-5 hover:border-primary/50 transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-                  <spec.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h4 className="text-base font-bold text-foreground mb-1 font-[family-name:var(--font-poppins)]">
-                  {spec.title}
-                </h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {spec.description}
-                </p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </div>
