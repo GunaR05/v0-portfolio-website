@@ -41,17 +41,17 @@
 
 .dark {
   --background: #030812;
-  --foreground: #A8C4D4;
+  --foreground: #E8F0FE;
   --card: #043780;
-  --card-foreground: #FFFFFF;
+  --card-foreground: #E8F0FE;
   --popover: #020764;
-  --popover-foreground: #FFFFFF;
+  --popover-foreground: #E8F0FE;
   --primary: #025EC4;
   --primary-foreground: #ffffff;
   --secondary: #020764;
   --secondary-foreground: #ffffff;
   --muted: #020764;
-  --muted-foreground: #93C5E8;
+  --muted-foreground: #8BA3BC;
   --accent: #0ECCED;
   --accent-foreground: #030812;
   --destructive: oklch(0.396 0.141 25.723);
@@ -125,9 +125,6 @@
   }
   html {
     scroll-behavior: smooth;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply text-white;
   }
 }
 
