@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter, Poppins, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { CursorGlow } from '@/components/cursor-glow'
+import { AIChatbot } from '@/components/ai-chatbot'
 import './globals.css'
 
 const inter = Inter({ 
@@ -57,6 +59,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <CursorGlow />
+          <AIChatbot />
           {children}
         </ThemeProvider>
         <Analytics />

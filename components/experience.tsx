@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { Puzzle, Link2, Rocket, Target, Calendar, MapPin, Handshake } from "lucide-react"
+import { useRef } from "react"
 
 const timeline = [
   {
@@ -18,7 +19,7 @@ const timeline = [
     ],
     featured: {
       tag: "Aiera × Anthropic Official Integration",
-      text: "Contributed to the official Aiera × Anthropic partnership — built the MCP server integrating Aiera's trusted market intelligence into Claude for Financial Services. Covers 45,000+ annual events across 13,000+ global companies. Part of Anthropic's Financial Analysis Solution for institutional investors.",
+      text: "Contributed to the official Aiera × Anthropic partnership, built the MCP server integrating Aiera's trusted market intelligence into Claude for Financial Services. Covers 45,000+ annual events across 13,000+ global companies. Part of Anthropic's Financial Analysis Solution for institutional investors.",
       stats: ["45K+ Events", "13K+ Companies", "100+ Macro Entities"]
     }
   },
@@ -100,30 +101,50 @@ const specializations = [
 ]
 
 export function Experience() {
+  const timelineRef = useRef(null)
+  const isTimelineInView = useInView(timelineRef, { once: true, margin: "-100px" })
+
   return (
     <section id="experience" className="py-20 md:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <motion.span 
+            className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Experience
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]">
+          </motion.span>
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-poppins)]"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Professional <span className="gradient-text">Journey</span>
-          </h2>
+          </motion.h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-8">
           {/* Left - Timeline (2 columns) */}
-          <div className="lg:col-span-2 relative">
-            {/* Gradient vertical line */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block" />
+          <div ref={timelineRef} className="lg:col-span-2 relative">
+            {/* Animated gradient vertical line */}
+            <motion.div 
+              className="absolute left-4 top-0 bottom-0 w-0.5 gradient-bg rounded-full hidden md:block origin-top"
+              initial={{ scaleY: 0 }}
+              animate={isTimelineInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 2, ease: "easeOut" }}
+            />
 
             <div className="space-y-8">
               {timeline.map((item, index) => (
@@ -135,8 +156,8 @@ export function Experience() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative md:pl-12"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-2 top-2 w-5 h-5 rounded-full bg-card border-2 border-primary hidden md:flex items-center justify-center">
+                  {/* Timeline dot with pulse */}
+                  <div className="absolute left-2 top-2 w-5 h-5 rounded-full bg-card border-2 border-primary hidden md:flex items-center justify-center timeline-dot-pulse">
                     <div className="w-2 h-2 rounded-full gradient-bg" />
                   </div>
 

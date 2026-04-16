@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, Newspaper } from "lucide-react"
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -14,6 +14,7 @@ const socialLinks = [
   { icon: Github, href: "https://github.com/gunashree-rajakumar", label: "GitHub" },
   { icon: Linkedin, href: "https://linkedin.com/in/rajakumargunashree", label: "LinkedIn" },
   { icon: Mail, href: "mailto:rajakumar.g@northeastern.edu", label: "Email" },
+  { icon: Newspaper, href: "https://gunashree.substack.com", label: "Systems That Scale" },
 ]
 
 export function Footer() {
@@ -95,9 +96,13 @@ export function Footer() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 pt-8 border-t border-border text-center"
         >
-          <p className="text-sm text-muted-foreground">
+          <motion.p 
+            className="text-sm font-medium bg-gradient-to-r from-white via-[#00C2FF] via-[#7B61FF] to-white bg-[size:200%_auto] bg-clip-text text-transparent"
+            animate={{ backgroundPosition: ["0% center", "200% center"] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          >
             © 2026 Gunashree Rajakumar
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </footer>
