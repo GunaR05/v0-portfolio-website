@@ -1,7 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { motion } from "framer-motion"
+
+// Simple seeded random for consistent SSR/client rendering
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
 
 // Generate a realistic-looking contribution grid (52 weeks × 7 days)
 function generateContributions(): number[][] {
@@ -12,9 +18,10 @@ function generateContributions(): number[][] {
   for (let w = 0; w < weeks; w++) {
     const week: number[] = []
     for (let d = 0; d < days; d++) {
-      // Weight toward weekdays, simulate realistic coding patterns
+      // Use seeded random for consistent SSR/client
+      const seed = w * 7 + d + 12345
+      const rand = seededRandom(seed)
       const isWeekend = d === 0 || d === 6
-      const rand = Math.random()
       let level = 0
 
       if (isWeekend) {
@@ -51,35 +58,48 @@ const LEVEL_COLORS = [
 const MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 const DAY_LABELS   = ["", "Mon", "", "Wed", "", "Fri", ""]
 
-export function GitHubContributionGraph() {
-  const [grid] = useState<number[][]>(() => generateContributions())
-  const [revealed, setRevealed] = useState<boolean[][]>(
-    () => Array.from({ length: 52 }, () => Array(7).fill(false))
-  )
-  const [hoveredCell, setHoveredCell] = useState<{ w: number; d: number } | null>(null)
-  const [totalContributions] = useState(() => {
-    const g = generateContributions()
-    return g.flat().reduce((sum, v) => sum + v, 0)
-  })
+// Pre-generate grid to avoid hydration mismatch
+const STATIC_GRID = generateContributions()
+const STATIC_TOTAL = STATIC_GRID.flat().reduce((sum, v) => sum + v, 0)
 
-  // Reveal cells left-to-right, top-to-bottom with stagger
+export function GitHubContributionGraph() {
+  const grid = STATIC_GRID
+  const [revealed, setRevealed] = useState<boolean[][]>([])
+  const [hoveredCell, setHoveredCell] = useState<{ w: number; d: number } | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  // Initialize revealed state after mount to avoid hydration issues
   useEffect(() => {
+    setRevealed(Array.from({ length: 52 }, () => Array(7).fill(false)))
+    setMounted(true)
+  }, [])
+
+  // Reveal cells left-to-right with stagger after mount
+  useEffect(() => {
+    if (!mounted) return
+    
     let col = 0
+    let timerId: ReturnType<typeof setTimeout>
+    
     const reveal = () => {
       if (col >= 52) return
       setRevealed(prev => {
+        if (prev.length === 0) return prev
         const next = prev.map(r => [...r])
-        for (let d = 0; d < 7; d++) next[col][d] = true
+        if (next[col]) {
+          for (let d = 0; d < 7; d++) next[col][d] = true
+        }
         return next
       })
       col++
-      setTimeout(reveal, 18)
+      timerId = setTimeout(reveal, 18)
     }
-    const timer = setTimeout(reveal, 300)
-    return () => clearTimeout(timer)
-  }, [])
+    
+    timerId = setTimeout(reveal, 300)
+    return () => clearTimeout(timerId)
+  }, [mounted])
 
-  const totalCommits = Math.floor(totalContributions * 12.4)
+  const totalCommits = Math.floor(STATIC_TOTAL * 12.4)
 
   return (
     <div className="w-full rounded-xl overflow-hidden border border-[#30363d] bg-[#0d1117] shadow-2xl">
