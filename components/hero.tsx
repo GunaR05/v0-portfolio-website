@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion"
 import { Download, ArrowDown, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect, useMemo, useRef } from "react"
-import { AIChatHero } from "./ai-chat-hero"
+import { WorldMapCard } from "./world-map-card"
 
 // Pre-tokenized code lines to avoid hydration issues with regex
 const codeLines = [
@@ -727,8 +727,8 @@ export function Hero() {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="relative w-full"
             >
-              {/* AI Chat Hero Card */}
-              <AIChatHero />
+              {/* World Map Card */}
+              <WorldMapCard />
 
               {/* Decorative glow */}
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-2xl -z-10" />
