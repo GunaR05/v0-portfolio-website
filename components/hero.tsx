@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion"
 import { Download, ArrowDown, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect, useMemo, useRef } from "react"
-import { BrandShowcaseCarousel } from "./brand-showcase-carousel"
+import { GitHubGraph } from "./github-graph"
 
 // Pre-tokenized code lines to avoid hydration issues with regex
 const codeLines = [
@@ -27,11 +27,11 @@ const codeLines = [
 ]
 
 const tokenColors: Record<string, string> = {
-  keyword: "#7B61FF",
+  keyword: "#0066FF",
   class: "#00E5C3",
-  string: "#00C2FF",
-  comment: "#8BA3BC",
-  method: "#00C2FF",
+  string: "#0066FF",
+  comment: "#7BA4C7",
+  method: "#0066FF",
   plain: "inherit",
 }
 
@@ -48,7 +48,7 @@ function MatrixColumn({ x, delay }: { x: number; delay: number }) {
 
   return (
     <motion.div
-      className="absolute text-[#00C2FF] text-xs font-mono opacity-[0.04] pointer-events-none select-none"
+      className="absolute text-[#0066FF] text-xs font-mono opacity-[0.04] pointer-events-none select-none"
       style={{ left: `${x}%` }}
       initial={{ y: -200 }}
       animate={{ y: "100vh" }}
@@ -90,7 +90,7 @@ function BadgeSparkle({ delay }: { delay: number }) {
         repeatDelay: 2 + Math.random()
       }}
     >
-      <Sparkles className="w-3 h-3 text-[#00C2FF]" />
+      <Sparkles className="w-3 h-3 text-[#0066FF]" />
     </motion.div>
   )
 }
@@ -248,7 +248,7 @@ export function Hero() {
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,194,255,0.05) 0%, transparent 70%)"
+          background: "radial-gradient(circle, rgba(0,102,255,0.05) 0%, transparent 70%)"
         }}
         animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -286,8 +286,8 @@ export function Hero() {
                 width="72"
                 height="36"
                 rx="4"
-                fill="rgba(0,194,255,0.08)"
-                stroke="#00C2FF"
+                fill="rgba(0,102,255,0.08)"
+                stroke="#0066FF"
                 strokeWidth="1"
                 opacity="0.08"
                 filter="url(#node-glow)"
@@ -297,7 +297,7 @@ export function Hero() {
                 } as any}
               />
               {/* Label - smaller font */}
-              <text x={x + 36} y={y + 23} textAnchor="middle" fill="#00C2FF" fontSize="8" fontWeight="600" fontFamily="monospace" opacity="0.1">
+              <text x={x + 36} y={y + 23} textAnchor="middle" fill="#0066FF" fontSize="8" fontWeight="600" fontFamily="monospace" opacity="0.1">
                 {label}
               </text>
               
@@ -305,13 +305,13 @@ export function Hero() {
               {[0, 1, 2].map((dotIdx) => (
                 <g key={`dot-${i}-${dotIdx}`}>
                   {/* Dashed line to center */}
-                  <line x1={x} y1={y + 18} x2="900" y2="350" stroke="rgba(0,194,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
+                  <line x1={x} y1={y + 18} x2="900" y2="350" stroke="rgba(0,102,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
                   {/* Traveling dot */}
                   <motion.circle
                     cx={x}
                     cy={y + 18}
                     r="2.4"
-                    fill="#00C2FF"
+                    fill="#0066FF"
                     opacity="0.08"
                     filter="url(#rag-glow)"
                     animate={{ cx: [x, "900"], cy: [y + 18, "350"] }}
@@ -346,8 +346,8 @@ export function Hero() {
               {/* Hexagon - reduced opacity */}
               <motion.polygon
                 points={points}
-                fill={i === 1 ? "rgba(0,194,255,0.08)" : "rgba(0,194,255,0.08)"}
-                stroke="#00C2FF"
+                fill={i === 1 ? "rgba(0,102,255,0.08)" : "rgba(0,102,255,0.08)"}
+                stroke="#0066FF"
                 strokeWidth="1"
                 opacity="0.08"
                 filter="url(#node-glow)"
@@ -356,7 +356,7 @@ export function Hero() {
                 } as any}
               />
               {/* Label - smaller font, reduced opacity */}
-              <text x={node.cx} y={node.cy + 3} textAnchor="middle" fill="#00C2FF" fontSize="7" fontWeight="700" fontFamily="monospace" opacity="0.1">
+              <text x={node.cx} y={node.cy + 3} textAnchor="middle" fill="#0066FF" fontSize="7" fontWeight="700" fontFamily="monospace" opacity="0.1">
                 {node.label}
               </text>
 
@@ -366,13 +366,13 @@ export function Hero() {
                   {[0, 1, 2, 3].map((dotIdx) => (
                     <g key={`dot-connection-${dotIdx}`}>
                       {/* Dashed line */}
-                      <line x1={node.cx} y1={node.cy + node.size + 3} x2="900" y2={[350, 500][i]} stroke="rgba(0,194,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
+                      <line x1={node.cx} y1={node.cy + node.size + 3} x2="900" y2={[350, 500][i]} stroke="rgba(0,102,255,0.2)" strokeWidth="1" strokeDasharray="5,5" opacity="0.06" />
                       {/* Traveling dot */}
                       <motion.circle
                         cx={node.cx}
                         cy={node.cy + node.size + 3}
                         r="2.4"
-                        fill="#00C2FF"
+                        fill="#0066FF"
                         opacity="0.08"
                         filter="url(#rag-glow)"
                         animate={{ cy: [node.cy + node.size + 3, [350, 500][i]] }}
@@ -398,7 +398,7 @@ export function Hero() {
           cy="350"
           r="42"
           fill="rgba(123,97,255,0.08)"
-          stroke="#7B61FF"
+          stroke="#0066FF"
           strokeWidth="1"
           opacity="0.08"
           filter="url(#node-glow)"
@@ -407,7 +407,7 @@ export function Hero() {
           } as any}
         />
         {/* LLM Label - smaller, reduced opacity */}
-        <text x="1050" y="354" textAnchor="middle" fill="#7B61FF" fontSize="8" fontWeight="700" fontFamily="monospace" opacity="0.1">
+        <text x="1050" y="354" textAnchor="middle" fill="#0066FF" fontSize="8" fontWeight="700" fontFamily="monospace" opacity="0.1">
           LLM
         </text>
 
@@ -423,7 +423,7 @@ export function Hero() {
                   cx="930"
                   cy={cy}
                   r="2.4"
-                  fill="#7B61FF"
+                  fill="#0066FF"
                   opacity="0.08"
                   filter="url(#rag-glow)"
                   animate={{ cx: ["930", "1008"], cy: [cy, "350"] }}
@@ -447,7 +447,7 @@ export function Hero() {
           height="50"
           rx="4"
           fill="rgba(123,97,255,0.08)"
-          stroke="#7B61FF"
+          stroke="#0066FF"
           strokeWidth="1"
           opacity="0.08"
           filter="url(#node-glow)"
@@ -456,7 +456,7 @@ export function Hero() {
           } as any}
         />
         {/* Output Label - smaller, reduced opacity */}
-        <text x="1192" y="355" textAnchor="middle" fill="#7B61FF" fontSize="7" fontWeight="600" fontFamily="monospace" opacity="0.1">
+        <text x="1192" y="355" textAnchor="middle" fill="#0066FF" fontSize="7" fontWeight="600" fontFamily="monospace" opacity="0.1">
           Response
         </text>
 
@@ -470,7 +470,7 @@ export function Hero() {
               cx="1092"
               cy="350"
               r="2.4"
-              fill="#7B61FF"
+              fill="#0066FF"
               opacity="0.08"
               filter="url(#rag-glow)"
               animate={{ cx: ["1092", "1150"] }}
@@ -589,7 +589,7 @@ export function Hero() {
                 >
                   {/* Animated gradient background */}
                   <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-[#00C2FF] via-[#7B61FF] to-[#00C2FF] bg-[size:200%_100%]"
+                    className="absolute inset-0 bg-gradient-to-r from-[#0066FF] via-[#0066FF] to-[#0066FF] bg-[size:200%_100%]"
                     animate={{ backgroundPosition: ["0% center", "200% center"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                   />
@@ -619,7 +619,7 @@ export function Hero() {
                       <motion.span
                         className="absolute inset-0 rounded-md"
                         style={{
-                          background: "linear-gradient(90deg, #00C2FF, #7B61FF, #00C2FF)",
+                          background: "linear-gradient(90deg, #0066FF, #0066FF, #0066FF)",
                           backgroundSize: "200% 100%",
                           padding: "1px",
                           WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -671,12 +671,12 @@ export function Hero() {
             {/* Animated data flow lines behind card */}
             <div className="absolute inset-0 -z-5 pointer-events-none">
               {[...Array(6)].map((_, i) => (
-                <div key={`line-${i}`} className="absolute w-full h-px" style={{ top: `${20 + i * 15}%`, backgroundColor: "rgba(0,194,255,0.1)" }}>
+                <div key={`line-${i}`} className="absolute w-full h-px" style={{ top: `${20 + i * 15}%`, backgroundColor: "rgba(0,102,255,0.1)" }}>
                   {[...Array(3)].map((_, dotIdx) => (
                     <motion.div
                       key={`dot-${dotIdx}`}
-                      className="absolute w-1 h-1 bg-[#00C2FF] rounded-full"
-                      style={{ boxShadow: "0 0 8px #00C2FF", top: "-1.5px" }}
+                      className="absolute w-1 h-1 bg-[#0066FF] rounded-full"
+                      style={{ boxShadow: "0 0 8px #0066FF", top: "-1.5px" }}
                       animate={{ x: ["-100%", "100%"] }}
                       transition={{
                         duration: 2 + (dotIdx * 0.5),
@@ -702,7 +702,7 @@ export function Hero() {
               ].map((badge, idx) => (
                 <motion.div
                   key={idx}
-                  className="absolute px-2 py-1 rounded border border-[#00C2FF] bg-background/50 text-xs font-mono text-[#00C2FF] backdrop-blur-sm"
+                  className="absolute px-2 py-1 rounded border border-[#0066FF] bg-background/50 text-xs font-mono text-[#0066FF] backdrop-blur-sm"
                   style={{
                     top: badge.top,
                     bottom: (badge as any).bottom,
@@ -725,10 +725,10 @@ export function Hero() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full h-96"
+              className="relative w-full"
             >
-              {/* Brand Showcase Carousel */}
-              <BrandShowcaseCarousel />
+              {/* GitHub Contribution Graph */}
+              <GitHubGraph />
 
               {/* Decorative glow */}
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-2xl -z-10" />

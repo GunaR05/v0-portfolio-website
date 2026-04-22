@@ -27,21 +27,7 @@ export const metadata: Metadata = {
   description: 'Applied AI Systems Engineer specializing in LLM integration, semantic search, and production-ready AI systems. Based in Boston, MA.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%23020B18'/><text y='.9em' font-size='75' x='12' font-family='Arial' font-weight='bold' fill='%230066FF'>G</text></svg>",
   },
 }
 

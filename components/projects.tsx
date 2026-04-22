@@ -14,7 +14,7 @@ function ParticleBackground() {
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 4 + 2,
-      color: Math.random() > 0.5 ? "#00C2FF" : "#7B61FF",
+      color: Math.random() > 0.5 ? "#0066FF" : "#0066FF",
       duration: Math.random() * 4 + 3,
       delay: Math.random() * 2,
     }))
@@ -188,7 +188,7 @@ export function Projects() {
                 whileHover={{ scale: 1.03 }}
                 className="group relative border border-border rounded-2xl p-6 overflow-hidden transition-all duration-400"
                 style={{
-                  boxShadow: "0 0 0 rgba(0, 194, 255, 0.3)"
+                  boxShadow: "0 0 0 rgba(0, 102, 255, 0.3)"
                 }}
               >
                 {/* Shimmer effect on hover */}
@@ -205,8 +205,8 @@ export function Projects() {
                 {/* Hover glow border */}
                 <motion.div
                   className="absolute inset-0 rounded-2xl pointer-events-none"
-                  initial={{ boxShadow: "0 0 0 rgba(0, 194, 255, 0)" }}
-                  whileHover={{ boxShadow: "0 0 20px rgba(0, 194, 255, 0.3)" }}
+                  initial={{ boxShadow: "0 0 0 rgba(0, 102, 255, 0)" }}
+                  whileHover={{ boxShadow: "0 0 20px rgba(0, 102, 255, 0.3)" }}
                   transition={{ duration: 0.4 }}
                 />
 
@@ -230,7 +230,7 @@ export function Projects() {
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4">
-                    <project.icon className="h-6 w-6" style={{ color: "#00C2FF" }} />
+                    <project.icon className="h-6 w-6" style={{ color: "#0066FF" }} />
                   </div>
 
                   {/* Category badge with pulse */}
@@ -248,9 +248,9 @@ export function Projects() {
                         key={tag}
                         className="px-2 py-1 text-xs rounded-md border cursor-pointer transition-all duration-200"
                         style={{
-                          background: hoveredTagId === `${project.id}-${tagIndex}` ? "#00C2FF" : "rgba(0,0,0,0.5)",
-                          color: hoveredTagId === `${project.id}-${tagIndex}` ? "#FFFFFF" : "#00C2FF",
-                          borderColor: "#00C2FF",
+                          background: hoveredTagId === `${project.id}-${tagIndex}` ? "#0066FF" : "rgba(0,0,0,0.5)",
+                          color: hoveredTagId === `${project.id}-${tagIndex}` ? "#FFFFFF" : "#0066FF",
+                          borderColor: "#0066FF",
                         }}
                         whileHover={{ scale: 1.05 }}
                         onMouseEnter={() => setHoveredTagId(`${project.id}-${tagIndex}`)}
@@ -293,8 +293,8 @@ export function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center text-sm gap-1 transition-all"
-                      style={{ color: "#00C2FF", fontWeight: 700 }}
-                      whileHover={{ color: "#00C2FF" }}
+                      style={{ color: "#0066FF", fontWeight: 700 }}
+                      whileHover={{ color: "#0066FF" }}
                     >
                       Case Study
                       <motion.div
