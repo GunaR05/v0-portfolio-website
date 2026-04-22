@@ -41,7 +41,7 @@ const CONTINENTS = [
 // Boston: roughly 30% from left, 28% from top
 // Bengaluru: roughly 62% from left, 52% from top
 const BOSTON = { x: 102, y: 78, label: "Boston, MA", sublabel: "Aiera × Anthropic", color: "#0066FF" }
-const BENGALURU = { x: 308, y: 100, label: "Bengaluru", sublabel: "Flipkart · Airtel · Ola", color: "#7B61FF" }
+const BENGALURU = { x: 308, y: 100, label: "Bengaluru", sublabel: "Flipkart · Airtel · Ola", color: "#6633FF" }
 
 function PulsingDot({ cx, cy, color }: { cx: number; cy: number; color: string }) {
   return (

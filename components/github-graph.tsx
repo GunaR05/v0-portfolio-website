@@ -77,7 +77,7 @@ export function GitHubGraph() {
           {/* Avatar */}
           <div
             className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-            style={{ background: "linear-gradient(135deg, #00C2FF, #7B61FF)", color: "#fff" }}
+            style={{ background: "linear-gradient(135deg, #00C2FF, #6633FF)", color: "#fff" }}
           >
             G
           </div>
@@ -196,7 +196,7 @@ export function GitHubGraph() {
       >
         <span style={{ color: "#58A6FF" }}>ML / LLM / RAG</span>
         <span>·</span>
-        <span style={{ color: "#7B61FF" }}>&#x1F537; Aiera × Anthropic</span>
+        <span style={{ color: "#6633FF" }}>&#x1F537; Aiera × Anthropic</span>
         <span>·</span>
         <span style={{ color: "#3FB950", fontFamily: "monospace" }}>open_to_work</span>
       </div>

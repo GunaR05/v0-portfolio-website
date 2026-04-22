@@ -63,8 +63,8 @@ export function SystemArchitectureCard() {
               <motion.div
                 animate={{
                   boxShadow: activePipeline === idx 
-                    ? '0 0 20px rgba(0, 194, 255, 0.6)' 
-                    : '0 0 0px rgba(0, 194, 255, 0)',
+                    ? '0 0 20px rgba(0, 102, 255, 0.6)' 
+                    : '0 0 0px rgba(0, 102, 255, 0)',
                 }}
                 className={`flex-1 p-3 rounded-lg border-2 text-center min-w-0 ${
                   activePipeline === idx

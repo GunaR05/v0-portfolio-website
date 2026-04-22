@@ -65,7 +65,7 @@ export function About() {
             <div className="absolute -inset-12 pointer-events-none">
               <div className="absolute inset-0 grid-background rounded-full opacity-50" />
               <motion.div 
-                className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0ECCED] to-transparent blur-[40px] opacity-[0.06]"
+                className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0066FF] to-transparent blur-[40px] opacity-[0.06]"
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -77,38 +77,38 @@ export function About() {
               <svg className="absolute -inset-6 w-[252px] h-[252px] pointer-events-none" viewBox="0 0 252 252">
                 {/* Top-left corner */}
                 <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                  <line x1="10" y1="0" x2="10" y2="40" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="0" y1="10" x2="40" y2="10" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="10" y1="0" x2="10" y2="40" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
                 </motion.g>
                 {/* Top-right corner */}
                 <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }}>
-                  <line x1="242" y1="0" x2="242" y2="40" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="212" y1="10" x2="252" y2="10" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="242" y1="0" x2="242" y2="40" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="212" y1="10" x2="252" y2="10" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
                 </motion.g>
                 {/* Bottom-left corner */}
                 <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
-                  <line x1="10" y1="212" x2="10" y2="252" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="0" y1="242" x2="40" y2="242" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="10" y1="212" x2="10" y2="252" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="0" y1="242" x2="40" y2="242" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
                 </motion.g>
                 {/* Bottom-right corner */}
                 <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
-                  <line x1="242" y1="212" x2="242" y2="252" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="212" y1="242" x2="252" y2="242" stroke="#0ECCED" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="242" y1="212" x2="242" y2="252" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="212" y1="242" x2="252" y2="242" stroke="#0066FF" strokeWidth="2" strokeLinecap="round" />
                 </motion.g>
               </svg>
 
               {/* Profile photo */}
               <motion.div 
-                className="relative w-[220px] h-[220px] rounded-full p-[3px] bg-gradient-to-br from-[#0ECCED] to-[#025EC4]"
+                className="relative w-[220px] h-[220px] rounded-full p-[3px] bg-gradient-to-br from-[#0066FF] to-[#0066FF]"
                 animate={{ y: [-8, 0, -8] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
                 <motion.div 
                   className="w-full h-full rounded-full overflow-hidden bg-background relative"
-                  whileHover={{ boxShadow: "0 0 40px rgba(0,194,255,0.4)" }}
+                  whileHover={{ boxShadow: "0 0 40px rgba(0,102,255,0.4)" }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   style={{ 
-                    boxShadow: "0 0 40px rgba(0,194,255,0.2)"
+                    boxShadow: "0 0 40px rgba(0,102,255,0.2)"
                   }}
                 >
                   <Image
@@ -127,7 +127,7 @@ export function About() {
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <div 
-                      className="w-full h-[2px] bg-[#0ECCED]"
+                      className="w-full h-[2px] bg-[#0066FF]"
                       style={{ opacity: 0.15 }}
                     />
                   </motion.div>
