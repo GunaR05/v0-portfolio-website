@@ -40,7 +40,7 @@ const CONTINENTS = [
 // City coordinates in the 500x280 viewBox
 // Boston: roughly 30% from left, 28% from top
 // Bengaluru: roughly 62% from left, 52% from top
-const BOSTON = { x: 102, y: 78, label: "Boston, MA", sublabel: "Aiera × Anthropic", color: "#00C2FF" }
+const BOSTON = { x: 102, y: 78, label: "Boston, MA", sublabel: "Aiera × Anthropic", color: "#0066FF" }
 const BENGALURU = { x: 308, y: 100, label: "Bengaluru", sublabel: "Flipkart · Airtel · Ola", color: "#7B61FF" }
 
 function PulsingDot({ cx, cy, color }: { cx: number; cy: number; color: string }) {
@@ -121,7 +121,7 @@ export function WorldMapCard() {
             y1={BOSTON.y}
             x2={BENGALURU.x}
             y2={BENGALURU.y}
-            stroke="#00C2FF"
+            stroke="#0066FF"
             strokeWidth={1.2}
             strokeDasharray="6 4"
             strokeDashoffset={dashOffset}
