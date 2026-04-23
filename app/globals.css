@@ -4,24 +4,24 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #0D1B2A;
-  --card: #f8fafc;
-  --card-foreground: #0D1B2A;
-  --popover: #ffffff;
-  --popover-foreground: #0D1B2A;
+  --background: #F8F9FA;
+  --foreground: #0A0F1A;
+  --card: #F0F2F5;
+  --card-foreground: #0A0F1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0F1A;
   --primary: #0066FF;
   --primary-foreground: #ffffff;
-  --secondary: #6633FF;
+  --secondary: #1E90FF;
   --secondary-foreground: #ffffff;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #00AAFF;
+  --muted: #E8ECF2;
+  --muted-foreground: #4A5568;
+  --accent: #2979FF;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #e2e8f0;
-  --input: #e2e8f0;
+  --border: #D1D9E6;
+  --input: #D1D9E6;
   --ring: #0066FF;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -127,7 +127,7 @@
     scroll-behavior: smooth;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply text-white;
+    color: var(--foreground);
   }
 }
 
