@@ -40,7 +40,7 @@ const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]|;:,./<>?"
 
 // Matrix Rain Column component
 function MatrixColumn({ x, delay }: { x: number; delay: number }) {
-  const chars = useMemo(() => 
+  const chars = useMemo(() =>
     Array.from({ length: 15 }, () => matrixChars[Math.floor(Math.random() * matrixChars.length)]),
     []
   )
@@ -78,7 +78,7 @@ function BadgeSparkle({ delay }: { delay: number }) {
       className="absolute pointer-events-none"
       style={{ left: positions.x, top: positions.y }}
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ 
+      animate={{
         opacity: [0, 1, 0],
         scale: [0, 1, 0],
         rotate: [0, 180]
@@ -185,11 +185,11 @@ function useMagneticHover(strength: number = 25) {
 
 export function Hero() {
   const { displayText, isComplete } = useTypewriter(
-    "Senior Software Engineer & Applied AI Systems Engineer",
+    "Senior Software Engineer - AI Systems",
     60,
     800
   )
-  
+
   const yearsCount = useCounter(5, 1500, 1200)
   const reqCount = useCounter(10, 1500, 1400)
   const companiesCount = useCounter(4, 1500, 1600)
@@ -197,7 +197,7 @@ export function Hero() {
   const [visibleLines, setVisibleLines] = useState(0)
 
   // Matrix rain columns
-  const matrixColumns = useMemo(() => 
+  const matrixColumns = useMemo(() =>
     Array.from({ length: 20 }, (_, i) => ({
       id: i,
       x: (i / 20) * 100,
@@ -258,21 +258,21 @@ export function Hero() {
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" style={{ zIndex: 0 }}>
         <defs>
           <filter id="rag-glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
           <filter id="node-glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         </defs>
-        
+
         {/* LEFT SIDE - Data Sources (4 glowing boxes) - MOVED TO RIGHT */}
         {["Data", "Docs", "APIs", "Events"].map((label, i) => {
           const y = 150 + i * 150
@@ -300,7 +300,7 @@ export function Hero() {
               <text x={x + 36} y={y + 23} textAnchor="middle" fill="#0066FF" fontSize="8" fontWeight="600" fontFamily="monospace" opacity="0.1">
                 {label}
               </text>
-              
+
               {/* Connecting lines to center with traveling dots */}
               {[0, 1, 2].map((dotIdx) => (
                 <g key={`dot-${i}-${dotIdx}`}>
@@ -340,7 +340,7 @@ export function Hero() {
             const y = node.cy + node.size * Math.sin(angle)
             return `${x},${y}`
           }).join(" ")
-          
+
           return (
             <g key={`node-${i}`}>
               {/* Hexagon - reduced opacity */}
@@ -492,9 +492,9 @@ export function Hero() {
         animate={{ scale: [1, 1.02, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
-      
-      
-      
+
+
+
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
           {/* Left content — min 45% on desktop, full width on mobile */}
@@ -519,14 +519,14 @@ export function Hero() {
 
             {/* Main heading with clip-path reveal */}
             <div>
-              <motion.h1 
+              <motion.h1
                 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-poppins)] leading-tight"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
                 <motion.span
-                  className="inline-block"
+                  className="inline-block dark:text-white text-foreground"
                   initial={{ clipPath: "inset(0 100% 0 0)" }}
                   animate={{ clipPath: "inset(0 0% 0 0)" }}
                   transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -550,7 +550,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-primary font-semibold h-8"
+              className="text-lg md:text-xl text-primary font-semibold h-8"
             >
               <span>{displayText}</span>
               <span className={`cursor-blink ${isComplete ? 'opacity-0' : ''}`}>|</span>
@@ -563,8 +563,8 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-muted-foreground max-w-xl leading-relaxed"
             >
-              I build AI systems that work in the real world, not just in notebooks. 
-              5+ years shipping production-grade ML infrastructure, LLM-powered agentic systems, 
+              I build AI systems that work in the real world, not just in notebooks.
+              5+ years shipping production-grade ML infrastructure, LLM-powered agentic systems,
               and distributed backends across fintech, e-commerce, telecom, and ride-hailing at scale.
             </motion.p>
 
@@ -693,12 +693,12 @@ export function Hero() {
             {/* Floating tech badges — desktop only, anchored to right side of card */}
             <div className="absolute inset-0 -z-5 pointer-events-none">
               {[
-                { text: "PY",  top: "-30px",  right: "-20px" },
-                { text: "AI",  top: "20%",    right: "-50px" },
-                { text: "{}",  bottom: "80px", right: "-40px" },
-                { text: "RAG", top: "50%",    right: "-60px" },
+                { text: "PY", top: "-30px", right: "-20px" },
+                { text: "AI", top: "20%", right: "-50px" },
+                { text: "{}", bottom: "80px", right: "-40px" },
+                { text: "RAG", top: "50%", right: "-60px" },
                 { text: "LLM", bottom: "20px", right: "-45px" },
-                { text: "API", top: "40%",    right: "-55px" }
+                { text: "API", top: "40%", right: "-55px" }
               ].map((badge, idx) => (
                 <motion.div
                   key={idx}
