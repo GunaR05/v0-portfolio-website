@@ -129,6 +129,13 @@
   h1, h2, h3, h4, h5, h6 {
     color: var(--foreground);
   }
+  /* Ensure all text elements inherit the theme foreground in light mode */
+  :root p, :root li, :root label {
+    color: var(--foreground);
+  }
+  :root .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
 }
 
 .gradient-text {
